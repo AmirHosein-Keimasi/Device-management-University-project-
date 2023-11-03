@@ -14,8 +14,6 @@ import {
 } from "@mui/material";
 import Home from "../../Pages/Home";
 import About from "../../Pages/About";
-import MainContainer from "../MainContainer";
-import ItemCard from "../ItemCard";
 
 const drawerWidth = 240;
 export default function DrawerAppBar() {
@@ -26,9 +24,15 @@ export default function DrawerAppBar() {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
-      </Typography>
+      <Box
+        sx={{
+          justifyContent: "center",
+          alignItems: "center",
+          flexGrow: 0,
+        }}
+      >
+        <img src={require("../../Assets/Logo.png")} alt="Logo" />
+      </Box>{" "}
       <Divider />
       <List sx={{ textAlign: "center" }}>
         <Home />

@@ -1,15 +1,67 @@
-import React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { Box, Grid } from "@mui/material";
-import { Category } from "../db";
+import {
+  Typography,
+  Button,
+  CardMedia,
+  CardContent,
+  Card,
+  Box,
+  Grid,
 
-console.log(Category.name);
+  CardActions,
+
+} from "@mui/material";
+import { useState, useEffect } from "react";
+import { getCategorys } from "../Container/Contactsservises";
+
+import { Link } from "react-router-dom";
+
 const ItemCard = () => {
+  const [CategoryAlldata, setCategorydata] = useState([]);
+
+  //   const ExpandMore = styled((props) => {
+  //     const { expand, ...other } = props;
+  //     return <IconButton {...other} />;
+  //   })(({ theme, expand }) => ({
+  //     transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  //     marginLeft: "auto",
+  //     transition: theme.transitions.create("transform", {
+  //       duration: theme.transitions.duration.shortest,
+  //     }),
+  //   }));
+
+  //   const [expanded, setExpanded] = useState();
+
+  //   const handleExpandClick = () => {
+  //     setExpanded(!expanded);
+  //   };
+  //   <ExpandMore
+  //   expand={expanded}
+  //   onClick={handleExpandClick}
+  //   aria-expanded={expanded}
+  //   aria-label="show more"
+  // >
+  //   <ExpandMoreIcon />
+  // </ExpandMore>
+  // <Collapse in={expanded} timeout="auto" unmountOnExit>
+  //   <Typography paragraph></Typography>
+  // </Collapse>
+
+  useEffect(() => {
+    const fetchDate = async () => {
+      try {
+        const { data } = await getCategorys();
+        setCategorydata(data);
+        // console.log(CategoryAlldata);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    return () => {
+      fetchDate();
+    };
+  }, []);
+
   return (
     <Box
       sx={{
@@ -20,58 +72,44 @@ const ItemCard = () => {
       }}
     >
       <Grid container>
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-          <Card
-            sx={{
-              maxWidth: 700,
-            }}
-          >
-            {/*
-             category.img
-             category.name
-        
-            */}
-            <CardMedia sx={{ height: 150 }} src={Category.img} title= { Category.id} />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-             { Category.name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                category.description
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small">View category items</Button>
-              <Button size="small">delete Category</Button>
-            </CardActions>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-        <Card
-            sx={{
-              maxWidth: 700,
-            }}
-          >
-            {/*
-             category.img
-             category.name
-        
-            */}
-            <CardMedia sx={{ height: 150 }} src="" title="پروژکتور" />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                category.name
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                category.description
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small">View category items</Button>
-              <Button size="small">delete Category</Button>
-            </CardActions>
-          </Card>
-        </Grid>
+        {Object.values(CategoryAlldata).map((item, index) => (
+          <Grid xs={12} sm={6} md={4} lg={4} xl={4} spacing={1}>
+            <Card
+              sx={{
+                maxWidth: 700,
+                mt: 3,
+              }}
+            >
+              <CardMedia
+                component="img"
+                sx={{ height: 160 }}
+                image={item.img}
+                title="green iguana"
+              />
+
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {item.name}
+                </Typography>
+                <Typography variant="body1" color="text.secondary">
+                  {item.description}
+                </Typography>
+              </CardContent>
+
+              <CardActions>
+                <Button size="small">
+                  {" "}
+                  <Button size="large">
+                    <Link to={`Category/${item.id}`} className="btn mx-2">
+                      نمایش دسته بندی
+                    </Link>
+                  </Button>
+                </Button>
+                <Button size="small">حذف دسته بندی</Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
     </Box>
   );

@@ -12,13 +12,19 @@ export default function AdapterJalali() {
     [existingTheme]
   );
 
+  const handelGetDate = (e) => {
+    console.log(new Intl.DateTimeFormat("fa-IR").format(e));
+  };
+
+  
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}  className="form-control">
       <div dir="rtl">
         <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
           <DatePicker
-            label="Date Picker"
+            label=""
             defaultValue={new Date(2023, 10, 1)}
+            onChange={handelGetDate}  className="form-control"
           />
         </LocalizationProvider>
       </div>

@@ -15,7 +15,7 @@ const MainContainer = () => {
               cColor="primary"
               icon={<Add />}
               align="center"
-              text={<Link to={"/add"} className="btn mx-2">اضافه کردن یک ایتم</Link>}
+              text={<Link to={"/MainPage/add"} className="btn mx-2">اضافه کردن یک ایتم</Link>}
             >
               {" "}
             </CustomDivider>
@@ -26,7 +26,7 @@ const MainContainer = () => {
               cColor="primary"
               icon={<RemoveRedEye />}
               align="center"
-              text={<Link to={"/CloseServises"} className="btn mx-2">نزدیک ترین سرویس ها</Link>}
+              text={<Link to={"/NearestService"} className="btn mx-2">نزدیک ترین سرویس ها</Link>}
 
             />
           </Grid>

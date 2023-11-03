@@ -3,21 +3,21 @@ import "./App.css";
 import Navbar from "./Components/NavBar/Navbar";
 import MainPage from "./Components/MainPage";
 import AddItem from "./Components/AddItem";
-import CloseServises from "./Components/CloseServises";
+import NearestService from "./Components/NearestService";
 import NotFound from "./Components/NotFound";
+import ViewItem from "./Components/ViewItem";
 
 function App() {
   return (
     <div>
       <Navbar />
-
       <Routes>
         <Route path="/" element={<Navigate to="/MainPage" />} />
-        <Route path="/MainPage" element={<MainPage />} />.
-        <Route path="add" element={<AddItem />} />
-        <Route path="CloseServises" element={<CloseServises />} />
-        <Route path="*" element={<NotFound/>} />
-
+        <Route path="/MainPage/add" element={<AddItem />} />
+        <Route path="/MainPage" element={<MainPage />} />
+        <Route path="/NearestService" element={<NearestService />} />
+        <Route path="/MainPage/view/:itemId" element={<ViewItem />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

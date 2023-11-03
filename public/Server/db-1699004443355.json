@@ -1,0 +1,66 @@
+{
+  "contacts": [
+    {
+      "fullname": "امیرحسین کیماسی",
+      "photo": "https://avatars.dicebear.com/api/male/mamad.svg",
+      "mobile": 9309958358,
+      "email": "morad@april.biz",
+      "job": "برنامه نویس",
+      "group": "3",
+      "id": 2
+    },
+    {
+      "fullname": " فرشاد لطفی",
+      "photo": "https://avatars.dicebear.com/api/male/farshad.svg",
+      "mobile": "+989332548474",
+      "email": "farshad@gmail.com",
+      "job": "برنامه نویس و مدرس",
+      "group": "3",
+      "id": 3
+    },
+    {
+      "fullname": " لیلا غلامی ",
+      "photo": "https://avatars.dicebear.com/api/female/leila.svg",
+      "mobile": "+989215147848",
+      "email": "leila@april.biz",
+      "job": "برنامه نویس و مدرس",
+      "group": "3",
+      "id": 3
+    },
+    {
+      "fullname": "نسترن خدایی",
+      "photo": "https://avatars.dicebear.com/api/female/nastaran.svg",
+      "mobile": "+989387845214",
+      "email": "nasi@gmail.com",
+      "job": "برنامه نویس و مدرس",
+      "group": "3",
+      "id": 3
+    }
+  ],
+  "groups": [
+    {
+      "id": "1",
+      "name": "همکار"
+    },
+    {
+      "id": "2",
+      "name": "دوست"
+    },
+    {
+      "id": "3",
+      "name": "فامیل"
+    },
+    {
+      "id": "4",
+      "name": "سرویس"
+    },
+    {
+      "id": "5",
+      "name": "آشنا"
+    },
+    {
+      "id": "6",
+      "name": "پارتنر"
+    }
+  ]
+}

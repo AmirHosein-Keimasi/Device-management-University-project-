@@ -8,35 +8,26 @@ import { Add } from "@mui/icons-material";
 import gorbe from "../Assets/gorbe.png";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import DateTimerPicker from "./DateTimerPicker";
+import { useEffect, useState } from "react";
+import { getCategorys } from "../Container/Contactsservises";
 
 const AddItem = () => {
-  const groups = [
-    {
-      id: "1",
-      name: "همکار",
-    },
-    {
-      id: "2",
-      name: "دوست",
-    },
-    {
-      id: "3",
-      name: "فامیل",
-    },
-    {
-      id: "4",
-      name: "سرویس",
-    },
-    {
-      id: "5",
-      name: "آشنا",
-    },
-    {
-      id: "6",
-      name: "پارتنر",
-    },
-  ];
+  const [CategoryAlldata, setCategorydata] = useState([]);
+  useEffect(() => {
+    const fetchDate = async () => {
+      try {
+        const { data } = await getCategorys();
+        setCategorydata(data);
+        // console.log(CategoryAlldata);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
+    return () => {
+      fetchDate();
+    };
+  }, []);
   return (
     <>
       {" "}
@@ -48,7 +39,8 @@ const AddItem = () => {
         text={"اضافه کردن یک ایتم"}
       />
       <Grid containe className="p-3">
-        <Grid xs={6} sm={6} md={6} lg={6} xl={6} sx={{ mt: 1 }}>
+        
+        <Grid xs={12} sm={12} md={12} lg={6} xl={8} sx={{ mt: 1 }}>
           <img
             src={gorbe}
             height="400px"
@@ -61,7 +53,7 @@ const AddItem = () => {
           />
         </Grid>
 
-        <Grid xs={6} sm={6} md={6} lg={6} xl={6}>
+        <Grid xs={6} sm={6} md={4} lg={4} xl={4}>
           <div className="row mt-5">
             <div className="col-md-6">
               {/* {errors?.map((error,index)=>(
@@ -69,12 +61,12 @@ const AddItem = () => {
                   ))} */}
               <Formik
                 initialValues={{
-                  fullname: "",
-                  photo: "",
-                  mobile: "",
-                  email: "",
-                  job: "",
-                  group: "",
+                  name: "",
+                  daysLeft: "",
+                  periodService: "",
+                  CreateAt: "",
+                  discription: "",
+                  categorys: "",
                 }}
                 validationSchema={contactSchema}
                 onSubmit={(values) => {
@@ -84,17 +76,17 @@ const AddItem = () => {
                 <Form>
                   <div className="mb-2">
                     <Field
-                      name="fullname"
+                      name="name"
                       type="text"
                       className="form-control"
-                      placeholder="نام و نام خانوادگی"
+                      placeholder="نام ایتم"
                     />
                     <ErrorMessage
-                      name="fullname"
+                      name="name"
                       render={(msg) => <div className="text-danger">{msg}</div>}
                     />
                   </div>
-                  <div className="mb-2">
+                  {/* <div className="mb-2">
                     <Field
                       name="photo"
                       type="text"
@@ -106,17 +98,17 @@ const AddItem = () => {
                       name="photo"
                       render={(msg) => <div className="text-danger">{msg}</div>}
                     />
-                  </div>
+                  </div> */}
                   <div className="mb-2">
                     <Field
-                      name="mobile"
+                      name="daysLeft"
                       type="number"
                       className="form-control"
-                      placeholder="شماره موبایل"
+                      placeholder="دوره سرویس"
                     />
 
                     <ErrorMessage
-                      name="mobile"
+                      name="daysLeft"
                       render={(msg) => <div className="text-danger">{msg}</div>}
                     />
                   </div>
@@ -147,22 +139,27 @@ const AddItem = () => {
                     />
                   </div>
                   <div className="mb-2">
-                    <Field name="group" as="select" className="form-control">
+                    <Field name="categorys" as="select" className="form-control">
                       <option value="">انتخاب گروه</option>
-                      {groups.length > 0 &&
-                        groups.map((group) => (
-                          <option key={group.id} value={group.id}>
+                      {CategoryAlldata.length > 0 &&
+                        CategoryAlldata.map((group) => (
+                          <option key={group.id} value={group.name}>
                             {group.name}
                           </option>
                         ))}
                     </Field>
 
                     <ErrorMessage
-                      name="group"
+                      name="categorys"
                       render={(msg) => <div className="text-danger">{msg}</div>}
                     />
                   </div>
-                  <div className="mx-2">
+                  <DateTimerPicker  />
+                </Form>
+              </Formik>
+
+             
+              <div className="mt-4">
                     <input
                       type="submit"
                       className="btn"
@@ -177,10 +174,6 @@ const AddItem = () => {
                       انصراف
                     </Link>
                   </div>
-                </Form>
-              </Formik>
-
-              <DateTimerPicker />
             </div>
           </div>
         </Grid>

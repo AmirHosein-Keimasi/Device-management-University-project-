@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CloseServises = () => {
+const NearestService = () => {
     return (
         <div>
             CloseServises
@@ -8,4 +8,4 @@ const CloseServises = () => {
     );
 }
 
-export default CloseServises;
+export default NearestService;

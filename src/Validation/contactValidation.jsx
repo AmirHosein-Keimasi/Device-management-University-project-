@@ -2,13 +2,8 @@ import * as Yup from "yup";
 
 export const contactSchema = Yup.object().shape({
   name: Yup.string().required("نام ایتم الزامی می باشد"),
-  photo: Yup.string()
-    .url("آدرس معتبر نیست")
-    .required("تصویر مخاطب الزامی می باشد"),
-  mobile: Yup.number().required("شماره موبایل الزامی می باشد"),
-  email: Yup.string()
-    .email("آدرس ایمیل معتبر نیست")
-    .required("آدرس ایمیل الزامی می باشد"),
-  job: Yup.string().nullable(),
-  group: Yup.string().required("انتخاب گروه الزامی می باشد"),
+  periodService: Yup.number().required("وارد کردن دوره سرویس الزامی می باشد"),
+  createAt: Yup.number().required("تاریخ درست کردن ایتم"),
+  discription: Yup.string(),
+  categorys: Yup.string().required("انتخاب کتگوری الزامی می باشد"),
 });
