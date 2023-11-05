@@ -4,7 +4,7 @@ import CustomDivider from "../Constants/CustomDivider";
 import { Add, RemoveRedEye } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const MainContainer = () => {
+const DividereContainer = () => {
   return (
     <>
       <Box sx={{}}>
@@ -36,4 +36,4 @@ const MainContainer = () => {
   );
 };
 
-export default MainContainer;
+export default DividereContainer;

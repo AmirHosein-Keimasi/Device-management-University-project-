@@ -4,14 +4,18 @@ import ErrorImg from "../Assets/404.png";
 import CustomDivider from "../Constants/CustomDivider";
 import { Error } from "@mui/icons-material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { Helmet } from "react-helmet-async";
 
-const NotFound = () => {
+const NotFound = ({ helmetTitle }) => {
   const imageStyle = {
     maxWidth: "100%",
   };
   return (
     <>
       {" "}
+      <Helmet>
+        <title>{helmetTitle}</title>
+      </Helmet>
       <CustomDivider
         bColor="#primary.main"
         cColor="primary"
@@ -34,11 +38,10 @@ const NotFound = () => {
               sm: "none",
               xs: "none",
             },
-          
           }}
         >
           {" "}
-          <img src={`${notfound}`}style={imageStyle}></img>
+          <img src={`${notfound}`} style={imageStyle}></img>
         </Grid>
         <Grid
           xs={12}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Divider, Chip, Typography, Slide, Button } from "@mui/material";
+import { Divider, Chip, Slide, Button } from "@mui/material";
 
 const CustomDivider = ({ bColor, cColor, icon, align, text }) => {
   const [loading, setLoading] = useState(false);

@@ -14,8 +14,9 @@ import {
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getItems } from "../Container/Contactsservises";
+import { Helmet } from "react-helmet-async";
 
-const ViewItem = () => {
+const ViewItem = ({helmetTitle}) => {
   const [Items, setItems] = useState({});
   const ItemId = useParams();
 
@@ -39,6 +40,9 @@ const ViewItem = () => {
 
   return (
     <>
+    <Helmet>
+  <title>{helmetTitle}</title>
+</Helmet>
       <Box
         sx={{
           display: "flex",

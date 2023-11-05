@@ -10,8 +10,9 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import DateTimerPicker from "./DateTimerPicker";
 import { useEffect, useState } from "react";
 import { getCategorys } from "../Container/Contactsservises";
+import { Helmet } from "react-helmet-async";
 
-const AddItem = () => {
+const AddItem = ({helmetTitle}) => {
   const [CategoryAlldata, setCategorydata] = useState([]);
   useEffect(() => {
     const fetchDate = async () => {
@@ -30,6 +31,9 @@ const AddItem = () => {
   }, []);
   return (
     <>
+   <Helmet>
+  <title>{helmetTitle}</title>
+</Helmet>
       {" "}
       <CustomDivider
         bColor="#primary.main"
