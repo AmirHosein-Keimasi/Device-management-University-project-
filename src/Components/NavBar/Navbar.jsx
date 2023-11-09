@@ -17,6 +17,7 @@ import {
 import Home from "../../Pages/Home";
 import About from "../../Pages/About";
 import { Select } from "dracula-ui";
+import ThemeActionBtn from "../../Layouts/Themes/ThemeActionBtn";
 
 export default function DrawerAppBar() {
   const [SelectionValue, setSelectionValue] = useState("");
@@ -51,6 +52,7 @@ export default function DrawerAppBar() {
                 display: { xs: "none", sm: "flex" },
               }}
             >
+        
               {/* Selection */}
               <FormControl variant="standard">
                 <InputLabel id="demo-simple-select-standard-label">
@@ -81,7 +83,7 @@ export default function DrawerAppBar() {
                 justifyContent: "start",
                 alignItems: "center",
                 flexGrow: 0,
-                mr: 15,
+              
               }}
             >
               <img src={require("../../Assets/Logo.png")} alt="Logo" />

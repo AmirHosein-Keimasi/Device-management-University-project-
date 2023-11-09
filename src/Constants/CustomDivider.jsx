@@ -18,7 +18,7 @@ const CustomDivider = ({ bColor, cColor, icon, align, text }) => {
         direction="down"
         in={loading}
         style={{
-          transitionDelay: loading ? "200ms" : "0ms",
+          transitionDelay: loading ? "150ms" : "0ms",
         }}
       >
         <Divider
@@ -34,7 +34,8 @@ const CustomDivider = ({ bColor, cColor, icon, align, text }) => {
             color={cColor}
             icon={icon}
             label={
-              <Button
+              <Button  
+            
                 variant="body1"
                 color="black"
                 sx={{ textAlign: "center" }}
@@ -42,7 +43,7 @@ const CustomDivider = ({ bColor, cColor, icon, align, text }) => {
                 {text}
               </Button>
             }
-            sx={{ p: 3 }}
+            sx={{ px: 2, py:4 }}
           />
         </Divider>
       </Slide>

@@ -4,16 +4,34 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { contactSchema } from "../Validation/contactValidation";
 import CustomDivider from "../Constants/CustomDivider";
 import { Add } from "@mui/icons-material";
-
-import gorbe from "../Assets/gorbe.png";
+import Lottie from "react-lottie";
+import * as iGafVbshdn from "../Assets/iGafVbshdn.json";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import DateTimerPicker from "./DateTimerPicker";
 import { useEffect, useState } from "react";
 import { getCategorys } from "../Container/Contactsservises";
 import { Helmet } from "react-helmet-async";
+import { Box, Slide } from "@mui/material";
+import "../App.css";
 
-const AddItem = ({helmetTitle}) => {
+const AddItem = ({ helmetTitle }) => {
   const [CategoryAlldata, setCategorydata] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: iGafVbshdn,
+  };
+
+  useEffect(() => {
+    setLoading(true);
+
+    return () => {
+      setLoading(false);
+    };
+  }, []);
+
   useEffect(() => {
     const fetchDate = async () => {
       try {
@@ -31,10 +49,9 @@ const AddItem = ({helmetTitle}) => {
   }, []);
   return (
     <>
-   <Helmet>
-  <title>{helmetTitle}</title>
-</Helmet>
-      {" "}
+      <Helmet>
+        <title>{helmetTitle}</title>
+      </Helmet>{" "}
       <CustomDivider
         bColor="#primary.main"
         cColor="primary"
@@ -43,9 +60,19 @@ const AddItem = ({helmetTitle}) => {
         text={"اضافه کردن یک ایتم"}
       />
       <Grid containe className="p-3">
-        
         <Grid xs={12} sm={12} md={12} lg={6} xl={8} sx={{ mt: 1 }}>
-          <img
+          <Box
+            sx={{
+              position: "absolute",
+              zIndex: "-1",
+              right: "100px",
+              opacity: "20%",
+            }}
+          >
+            <Lottie options={defaultOptions} height={400} width={800} />
+          </Box>
+
+          {/* <img
             src={gorbe}
             height="400px"
             style={{
@@ -54,7 +81,7 @@ const AddItem = ({helmetTitle}) => {
               left: "100px",
               opacity: "50%",
             }}
-          />
+          /> */}
         </Grid>
 
         <Grid xs={6} sm={6} md={4} lg={4} xl={4}>
@@ -78,18 +105,28 @@ const AddItem = ({helmetTitle}) => {
                 }}
               >
                 <Form>
-                  <div className="mb-2">
-                    <Field
-                      name="name"
-                      type="text"
-                      className="form-control"
-                      placeholder="نام ایتم"
-                    />
-                    <ErrorMessage
-                      name="name"
-                      render={(msg) => <div className="text-danger">{msg}</div>}
-                    />
-                  </div>
+                  <Slide
+                    direction="right"
+                    in={loading}
+                    style={{
+                      transitionDelay: loading ? "350ms" : "0ms",
+                    }}
+                  >
+                    <div className="mb-2">
+                      <Field
+                        name="name"
+                        type="text"
+                        className="form-control"
+                        placeholder="نام ایتم"
+                      />
+                      <ErrorMessage
+                        name="name"
+                        render={(msg) => (
+                          <div className="text-danger">{msg}</div>
+                        )}
+                      />
+                    </div>
+                  </Slide>
                   {/* <div className="mb-2">
                     <Field
                       name="photo"
@@ -103,81 +140,124 @@ const AddItem = ({helmetTitle}) => {
                       render={(msg) => <div className="text-danger">{msg}</div>}
                     />
                   </div> */}
-                  <div className="mb-2">
-                    <Field
-                      name="daysLeft"
-                      type="number"
-                      className="form-control"
-                      placeholder="دوره سرویس"
-                    />
+                  <Slide
+                    direction="right"
+                    in={loading}
+                    style={{
+                      transitionDelay: loading ? "450ms" : "0ms",
+                    }}
+                  >
+                    <div className="mb-2">
+                      <Field
+                        name="daysLeft"
+                        type="number"
+                        className="form-control"
+                        placeholder="دوره سرویس"
+                      />
 
-                    <ErrorMessage
-                      name="daysLeft"
-                      render={(msg) => <div className="text-danger">{msg}</div>}
-                    />
-                  </div>
-                  <div className="mb-2">
-                    <Field
-                      name="email"
-                      type="email"
-                      className="form-control"
-                      placeholder="آدرس ایمیل"
-                    />
+                      <ErrorMessage
+                        name="daysLeft"
+                        render={(msg) => (
+                          <div className="text-danger">{msg}</div>
+                        )}
+                      />
+                    </div>
+                  </Slide>
+                  <Slide
+                    direction="right"
+                    in={loading}
+                    style={{
+                      transitionDelay: loading ? "550ms" : "0ms",
+                    }}
+                  >
+                    <div className="mb-2">
+                      <Field
+                        name="email"
+                        type="email"
+                        className="form-control"
+                        placeholder="آدرس ایمیل"
+                      />
 
-                    <ErrorMessage
-                      name="email"
-                      render={(msg) => <div className="text-danger">{msg}</div>}
-                    />
-                  </div>
-                  <div className="mb-2">
-                    <Field
-                      name="job"
-                      type="text"
-                      className="form-control"
-                      placeholder="شغل"
-                    />
+                      <ErrorMessage
+                        name="email"
+                        render={(msg) => (
+                          <div className="text-danger">{msg}</div>
+                        )}
+                      />
+                    </div>
+                  </Slide>
+                  <Slide
+                    direction="right"
+                    in={loading}
+                    style={{
+                      transitionDelay: loading ? "650ms" : "0ms",
+                    }}
+                  >
+                    <div className="mb-2">
+                      <Field
+                        name="job"
+                        type="text"
+                        className="form-control"
+                        placeholder="شغل"
+                      />
 
-                    <ErrorMessage
-                      name="job"
-                      render={(msg) => <div className="text-danger">{msg}</div>}
-                    />
-                  </div>
-                  <div className="mb-2">
-                    <Field name="categorys" as="select" className="form-control">
-                      <option value="">انتخاب گروه</option>
-                      {CategoryAlldata.length > 0 &&
-                        CategoryAlldata.map((group) => (
-                          <option key={group.id} value={group.name}>
-                            {group.name}
-                          </option>
-                        ))}
-                    </Field>
+                      <ErrorMessage
+                        name="job"
+                        render={(msg) => (
+                          <div className="text-danger">{msg}</div>
+                        )}
+                      />
+                    </div>
+                  </Slide>
+                  <Slide
+                    direction="right"
+                    in={loading}
+                    style={{
+                      transitionDelay: loading ? "750ms" : "0ms",
+                    }}
+                  >
+                    <div className="mb-2">
+                      <Field
+                        name="categorys"
+                        as="select"
+                        className="form-control"
+                      >
+                        <option value="">انتخاب گروه</option>
+                        {CategoryAlldata.length > 0 &&
+                          CategoryAlldata.map((group) => (
+                            <option key={group.id} value={group.name}>
+                              {group.name}
+                            </option>
+                          ))}
+                      </Field>
 
-                    <ErrorMessage
-                      name="categorys"
-                      render={(msg) => <div className="text-danger">{msg}</div>}
-                    />
-                  </div>
-                  <DateTimerPicker  />
+                      <ErrorMessage
+                        name="categorys"
+                        render={(msg) => (
+                          <div className="text-danger">{msg}</div>
+                        )}
+                      />
+                    </div>
+                  </Slide>
+                  <DateTimerPicker />
                 </Form>
               </Formik>
 
-             
               <div className="mt-4">
-                    <input
-                      type="submit"
-                      className="btn"
-                      style={{ backgroundColor: PURPLE }}
-                      value="ساخت مخاطب"
-                    />
-                    <Link
-                      to={"/"}
-                      className="btn mx-2"
-                      style={{ backgroundColor: COMMENT }}
-                    >
-                      انصراف
-                    </Link>
-                  </div>
+                <input
+                  type="submit"
+                  className="btn"
+                  style={{ backgroundColor: PURPLE }}
+                  value="ساخت مخاطب"
+                />
+                <Link
+                  to={"/"}
+                  className="btn mx-2"
+                  style={{ backgroundColor: COMMENT }}
+                >
+                  انصراف
+                </Link>
+              </div>
             </div>
           </div>
         </Grid>

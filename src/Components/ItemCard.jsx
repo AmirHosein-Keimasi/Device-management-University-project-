@@ -6,13 +6,11 @@ import {
   Card,
   Box,
   Grid,
-
   CardActions,
-
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import { getCategorys } from "../Container/Contactsservises";
-
+import { motion } from "framer-motion"
 import { Link } from "react-router-dom";
 
 const ItemCard = () => {
@@ -62,8 +60,27 @@ const ItemCard = () => {
     };
   }, []);
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.5,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 },
+  };
+  <motion.ul variants={container} initial="hidden" animate="show">
+  <motion.li variants={item}>     </motion.li>
+</motion.ul>
+
   return (
-    <Box
+
+      <Box
       sx={{
         display: "flex",
         alignItems: "center",
@@ -75,6 +92,7 @@ const ItemCard = () => {
         {Object.values(CategoryAlldata).map((item, index) => (
           <Grid xs={12} sm={6} md={4} lg={4} xl={4} spacing={1}>
             <Card
+            
               sx={{
                 maxWidth: 700,
                 mt: 3,
@@ -112,6 +130,7 @@ const ItemCard = () => {
         ))}
       </Grid>
     </Box>
+ 
   );
 };
 
