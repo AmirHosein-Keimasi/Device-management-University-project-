@@ -9,7 +9,7 @@ import {
   CardActions,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import { getCategorys } from "../Container/Contactsservises";
+import { getcategorys } from "../Server/servises";
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom";
 
@@ -47,9 +47,9 @@ const ItemCard = () => {
   useEffect(() => {
     const fetchDate = async () => {
       try {
-        const { data } = await getCategorys();
+        const { data } = await getcategorys();
         setCategorydata(data);
-        // console.log(CategoryAlldata);
+        console.log(CategoryAlldata);
       } catch (error) {
         console.log(error);
       }

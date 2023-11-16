@@ -1,19 +1,18 @@
 import axios from "axios";
 
 
-
 const SERVER_URL="http://localhost/v1"
 
 // Route const"http://localhost:9000/contacts/:contactId "
 //Get All Contacts
-export const getCategorys=()=>{
+export const getcategorys=()=>{
     const url = `${SERVER_URL}/get_category_list.php`
     return axios.get(url)
 }
 
 //Get Contact
-export const getItems=(itemId)=>{
-    const url = `${SERVER_URL}/Category/${itemId}`
+export const getContact=(contactId)=>{
+    const url = `${SERVER_URL}/contacts/${contactId}`
     return axios.get(url)
 }
 

@@ -59,14 +59,20 @@ const AddItem = ({ helmetTitle }) => {
         align="center"
         text={"اضافه کردن یک ایتم"}
       />
-      <Grid containe className="p-3">
-        <Grid xs={12} sm={12} md={12} lg={6} xl={8} sx={{ mt: 1 }}>
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-around"
+        alignItems="center"
+  
+      >
+        <Grid xs={6} sm={6} md={6} lg={6} xl={8} sx={{ mt: 1, ml: 100 }}>
           <Box
             sx={{
               position: "absolute",
               zIndex: "-1",
-              right: "100px",
-              opacity: "20%",
+
+              opacity: "80%",
             }}
           >
             <Lottie options={defaultOptions} height={400} width={800} />
