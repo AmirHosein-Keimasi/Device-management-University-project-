@@ -43,7 +43,7 @@ function getCategoryList($db) {
     try {
         $stmt = $db->prepare("SELECT * FROM category;");
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     } catch (PDOException $e) {
         echo "error" . $e;
@@ -69,7 +69,7 @@ function getProductList($db , $id_category) {
         $stmt->bindParam(':idC', $id_category, PDO::PARAM_STR);
 
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchall(PDO::FETCH_ASSOC);
         if ($stmt->rowCount() > 0) {
             return $result;
         } else {

@@ -17,33 +17,29 @@ function App() {
   }, []);
 
   const handelThemeCheng = () => {
-    setMode((prevMode) => (prevMode === "lightTheme" ? "darktheme" : "lightTheme"));
+    setMode((prevMode) =>
+      prevMode === "lightTheme" ? "darktheme" : "lightTheme"
+    );
   };
 
   return (
     <>
       <Mainlayouts mode={mode}>
-        <Navbar handelThemeCheng={handelThemeCheng}/>
+        <Navbar handelThemeCheng={handelThemeCheng} />
         <Routes>
           <Route
             path="/"
-            element={
-              <Navigate to="/MainPage" helmetTitle=" مدیریت دیوایس ها" />
-            }
+            element={<MainPage helmetTitle=" مدیریت دیوایس ها" />}
+          />{" "}
+          <Route
+            path="id_category/:itemId"
+            element={<ViewItem helmetTitle=" مدیریت دیوایس ها || دیوایس ها" />}
           />
           <Route
             path="/MainPage/add"
             element={
               <AddItem helmetTitle=" مدیریت دیوایس ها || اضافه کردن دیوایس" />
             }
-          />
-          <Route
-            path="/MainPage"
-            element={<MainPage helmetTitle=" مدیریت دیوایس ها" />}
-          />
-          <Route
-            path="/MainPage/Category/:itemId"
-            element={<ViewItem helmetTitle=" مدیریت دیوایس ها || دیوایس ها" />}
           />
           <Route
             path="/NearestService"

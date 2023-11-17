@@ -71,11 +71,11 @@ const AddItem = ({ helmetTitle }) => {
             sx={{
               position: "absolute",
               zIndex: "-1",
-
               opacity: "80%",
             }}
           >
-            <Lottie options={defaultOptions} height={400} width={800} />
+
+            {/* aks */}
           </Box>
 
           {/* <img

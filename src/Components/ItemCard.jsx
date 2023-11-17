@@ -12,10 +12,6 @@ import { useState, useEffect } from "react";
 import { getcategorys } from "../Server/servises";
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom";
-
-const ItemCard = () => {
-  const [CategoryAlldata, setCategorydata] = useState([]);
-
   //   const ExpandMore = styled((props) => {
   //     const { expand, ...other } = props;
   //     return <IconButton {...other} />;
@@ -43,13 +39,17 @@ const ItemCard = () => {
   // <Collapse in={expanded} timeout="auto" unmountOnExit>
   //   <Typography paragraph></Typography>
   // </Collapse>
+const ItemCard = () => {
+  const [CategoryAlldata, setCategorydata] = useState([]);
+
+
 
   useEffect(() => {
     const fetchDate = async () => {
       try {
         const { data } = await getcategorys();
         setCategorydata(data);
-        console.log(CategoryAlldata);
+        // console.log(CategoryAlldata);
       } catch (error) {
         console.log(error);
       }
@@ -90,18 +90,18 @@ const ItemCard = () => {
     >
       <Grid container>
         {Object.values(CategoryAlldata).map((item, index) => (
-          <Grid xs={12} sm={6} md={4} lg={4} xl={4} spacing={1}>
+          <Grid xs={12} sm={6} md={6} lg={4} xl={4} spacing={1}>
             <Card
             
               sx={{
-                maxWidth: 700,
+                maxWidth: 450,
                 mt: 3,
               }}
             >
               <CardMedia
                 component="img"
-                sx={{ height: 160 }}
-                image={item.img}
+                sx={{ height: 350 , alignContent:"center",justifyContent:"center" }}
+                image={item.imgLink}
                 title="green iguana"
               />
 
@@ -118,12 +118,11 @@ const ItemCard = () => {
                 <Button size="small">
                   {" "}
                   <Button size="large">
-                    <Link to={`Category/${item.id}`} className="btn mx-2">
+                    <Link to={`id_category/${item.id}`} className="btn mx-2">
                       نمایش دسته بندی
                     </Link>
                   </Button>
                 </Button>
-                <Button size="small">حذف دسته بندی</Button>
               </CardActions>
             </Card>
           </Grid>

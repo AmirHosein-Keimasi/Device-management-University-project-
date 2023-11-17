@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   Divider,
@@ -13,27 +13,83 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
+  Typography,
 } from "@mui/material";
 import Home from "../../Pages/Home";
 import About from "../../Pages/About";
-import { Select } from "dracula-ui";
+import { Button, Select } from "dracula-ui";
 import ThemeActionBtn from "../../Layouts/Themes/ThemeActionBtn";
+import { getcategorys } from "../../Server/servises";
+import { Link } from "react-router-dom";
+import { RemoveRedEye } from "@mui/icons-material";
+import CustomDivider from "../../Constants/CustomDivider";
 
 export default function DrawerAppBar() {
-  const [SelectionValue, setSelectionValue] = useState("");
+  const [CategoryAlldata, setCategorydata] = useState([]);
+
+  useEffect(() => {
+    const fetchDate = async () => {
+      try {
+        const { data } = await getcategorys();
+        setCategorydata(data);
+        // console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    return () => {
+      fetchDate();
+    };
+  }, []);
+
   const [open, setOpen] = useState(false);
-
-  const handleChange = (event) => {
-    setSelectionValue(event.target.value);
-  };
-
   const handleClose = () => {
     setOpen(false);
   };
-
   const handleOpen = () => {
     setOpen(true);
   };
+
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const handleDrawerToggle = () => {
+    setMobileOpen((prevState) => !prevState);
+  };
+  const drawerWidth = 240;
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <Box
+        sx={{
+          justifyContent: "center",
+          alignItems: "center",
+          flexGrow: 0,
+          my: 5,
+        }}
+      >
+        <img src={require("../../Assets/Logo.png")} alt="Logo" />
+      </Box>{" "}
+      <List sx={{ textAlign: "center", alignItems: "start" }}>
+        {Object.values(CategoryAlldata).map((item, index) => (
+          <CustomDivider
+           
+            bColor="#primary.main"
+            cColor="primary"
+            icon={<RemoveRedEye/>}
+            align="center"
+            text={
+              <Link to={`id_category/${item.id}`} className="btn p-0 top-50">
+                {item.name}
+              </Link>
+             
+            }
+         
+        >
+         
+        </CustomDivider>
+        ))}
+      </List>
+    </Box>
+  );
 
   return (
     <>
@@ -49,41 +105,47 @@ export default function DrawerAppBar() {
                 alignItems: "center",
                 mr: 3,
                 flexGrow: 1,
-                display: { xs: "none", sm: "flex" },
+                display: { xs: "flex", sm: "flex" },
               }}
             >
-        
               {/* Selection */}
-              <FormControl variant="standard">
-                <InputLabel id="demo-simple-select-standard-label">
-                  categoris
-                </InputLabel>
-                <Select
-                  labelId="demo-controlled-open-select-label"
-                  id="demo-controlled-open-select"
-                  open={open}
-                  onClose={handleClose}
-                  onOpen={handleOpen}
-                  value={SelectionValue}
-                  label="Age"
-                  onChange={handleChange}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem SelectionValue={10}>Ten</MenuItem>
-                  <MenuItem valSelectionValueue={20}>Twenty</MenuItem>
-                  <MenuItem SelectionValue={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
             </Stack>
+            <nav>
+              {" "}
+              <Drawer
+                anchor="l"
+                variant="temporary"
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                ModalProps={{
+                  keepMounted: true, // Better open performance on mobile.
+                }}
+                sx={{
+                  display: { xs: "block", sm: "none" },
+                  "& .MuiDrawer-paper": {
+                    boxSizing: "border-box",
+                    width: drawerWidth,
+                  },
+                }}
+              >
+                {drawer}
+              </Drawer>
+            </nav>{" "}
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="right"
+              onClick={handleDrawerToggle}
+              sx={{ display: { sm: "none" }, mr: 25 }}
+            >
+              <MenuIcon />
+            </IconButton>
             <Box
               sx={{
                 display: { xs: "flex", sm: "block" },
                 justifyContent: "start",
                 alignItems: "center",
                 flexGrow: 0,
-              
               }}
             >
               <img src={require("../../Assets/Logo.png")} alt="Logo" />
