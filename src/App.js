@@ -8,8 +8,29 @@ import NotFound from "./Components/NotFound";
 import ViewItem from "./Components/ViewItem";
 import Mainlayouts from "./Layouts/Themes/Mainlayouts";
 import { useEffect, useState } from "react";
+import { getcategorys } from "./Server/servises";
 
 function App() {
+
+  const [CategoryAlldata, setCategorydata] = useState([]);
+
+
+
+  useEffect(() => {
+    const fetchDate = async () => {
+      try {
+        const { data } = await getcategorys();
+        setCategorydata(data);
+        // console.log(CategoryAlldata);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    return () => {
+      fetchDate();
+    };
+  }, []);
   const [mode, setMode] = useState();
 
   useEffect(() => {
@@ -25,20 +46,20 @@ function App() {
   return (
     <>
       <Mainlayouts mode={mode}>
-        <Navbar handelThemeCheng={handelThemeCheng} />
+        <Navbar CategoryAlldata={CategoryAlldata} handelThemeCheng={handelThemeCheng} />
         <Routes>
           <Route
             path="/"
-            element={<MainPage helmetTitle=" مدیریت دیوایس ها" />}
+            element={<MainPage CategoryAlldata={CategoryAlldata} helmetTitle=" مدیریت دیوایس ها" />}
           />{" "}
           <Route
             path="id_category/:itemId"
-            element={<ViewItem helmetTitle=" مدیریت دیوایس ها || دیوایس ها" />}
+            element={<ViewItem CategoryAlldata={CategoryAlldata} helmetTitle=" مدیریت دیوایس ها || دیوایس ها" />}
           />
           <Route
             path="/MainPage/add"
             element={
-              <AddItem helmetTitle=" مدیریت دیوایس ها || اضافه کردن دیوایس" />
+              <AddItem  CategoryAlldata={CategoryAlldata} helmetTitle=" مدیریت دیوایس ها || اضافه کردن دیوایس" />
             }
           />
           <Route

@@ -10,39 +10,18 @@ import {
   Stack,
   AppBar,
   Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   Typography,
 } from "@mui/material";
-import Home from "../../Pages/Home";
-import About from "../../Pages/About";
-import { Button, Select } from "dracula-ui";
-import ThemeActionBtn from "../../Layouts/Themes/ThemeActionBtn";
-import { getcategorys } from "../../Server/servises";
+
 import { Link } from "react-router-dom";
-import { RemoveRedEye } from "@mui/icons-material";
+
 import CustomDivider from "../../Constants/CustomDivider";
 
-export default function DrawerAppBar() {
-  const [CategoryAlldata, setCategorydata] = useState([]);
-
-  useEffect(() => {
-    const fetchDate = async () => {
-      try {
-        const { data } = await getcategorys();
-        setCategorydata(data);
-        // console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    return () => {
-      fetchDate();
-    };
-  }, []);
-
+export default function DrawerAppBar({ CategoryAlldata }) {
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -60,32 +39,30 @@ export default function DrawerAppBar() {
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Box
         sx={{
-          justifyContent: "center",
+          justifyContent: "space-between",
           alignItems: "center",
           flexGrow: 0,
           my: 5,
         }}
       >
-        <img src={require("../../Assets/Logo.png")} alt="Logo" />
+        <img
+          src={require("../../Assets/Logo.png")}
+          className="w-50 "
+          alt="Logo"
+        />
       </Box>{" "}
       <List sx={{ textAlign: "center", alignItems: "start" }}>
         {Object.values(CategoryAlldata).map((item, index) => (
-          <CustomDivider
-           
-            bColor="#primary.main"
-            cColor="primary"
-            icon={<RemoveRedEye/>}
-            align="center"
-            text={
-              <Link to={`id_category/${item.id}`} className="btn p-0 top-50">
-                {item.name}
-              </Link>
-             
-            }
-         
-        >
-         
-        </CustomDivider>
+          <ListItem key={item.name} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <Link to={`id_category/${item.id}`} className="btn ">
+                  <ListItemText primary={item.name} />
+                  <Divider></Divider>
+                </Link>
+              </ListItemIcon>
+            </ListItemButton>
+          </ListItem>
         ))}
       </List>
     </Box>
@@ -108,11 +85,21 @@ export default function DrawerAppBar() {
                 display: { xs: "flex", sm: "flex" },
               }}
             >
+              <Typography
+            variant="h4"
+              >
+                 
+              </Typography>
               {/* Selection */}
             </Stack>
             <nav>
               {" "}
               <Drawer
+                PaperProps={{
+                  sx: {
+                    backgroundColor: "gray",
+                  },
+                }}
                 anchor="l"
                 variant="temporary"
                 open={mobileOpen}
@@ -136,7 +123,7 @@ export default function DrawerAppBar() {
               aria-label="open drawer"
               edge="right"
               onClick={handleDrawerToggle}
-              sx={{ display: { sm: "none" }, mr: 25 }}
+              sx={{ display: { sm: "none" }, mr: 40 }}
             >
               <MenuIcon />
             </IconButton>
@@ -148,7 +135,11 @@ export default function DrawerAppBar() {
                 flexGrow: 0,
               }}
             >
-              <img src={require("../../Assets/Logo.png")} alt="Logo" />
+              <img
+                src={require("../../Assets/Logo.png")}
+                className="w-50"
+                alt="Logo"
+              />
             </Box>{" "}
           </Toolbar>
         </AppBar>

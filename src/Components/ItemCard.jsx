@@ -1,65 +1,9 @@
-import {
-  Typography,
-  Button,
-  CardMedia,
-  CardContent,
-  Card,
-  Box,
-  Grid,
-  CardActions,
-} from "@mui/material";
-import { useState, useEffect } from "react";
-import { getcategorys } from "../Server/servises";
-import { motion } from "framer-motion"
+import { Button, CardMedia, Box, Grid } from "@mui/material";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-  //   const ExpandMore = styled((props) => {
-  //     const { expand, ...other } = props;
-  //     return <IconButton {...other} />;
-  //   })(({ theme, expand }) => ({
-  //     transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  //     marginLeft: "auto",
-  //     transition: theme.transitions.create("transform", {
-  //       duration: theme.transitions.duration.shortest,
-  //     }),
-  //   }));
+import "./Card.css";
 
-  //   const [expanded, setExpanded] = useState();
-
-  //   const handleExpandClick = () => {
-  //     setExpanded(!expanded);
-  //   };
-  //   <ExpandMore
-  //   expand={expanded}
-  //   onClick={handleExpandClick}
-  //   aria-expanded={expanded}
-  //   aria-label="show more"
-  // >
-  //   <ExpandMoreIcon />
-  // </ExpandMore>
-  // <Collapse in={expanded} timeout="auto" unmountOnExit>
-  //   <Typography paragraph></Typography>
-  // </Collapse>
-const ItemCard = () => {
-  const [CategoryAlldata, setCategorydata] = useState([]);
-
-
-
-  useEffect(() => {
-    const fetchDate = async () => {
-      try {
-        const { data } = await getcategorys();
-        setCategorydata(data);
-        // console.log(CategoryAlldata);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    return () => {
-      fetchDate();
-    };
-  }, []);
-
+const ItemCard = ({ CategoryAlldata }) => {
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -75,12 +19,11 @@ const ItemCard = () => {
     show: { opacity: 1 },
   };
   <motion.ul variants={container} initial="hidden" animate="show">
-  <motion.li variants={item}>     </motion.li>
-</motion.ul>
+    <motion.li variants={item}> </motion.li>
+  </motion.ul>;
 
   return (
-
-      <Box
+    <Box
       sx={{
         display: "flex",
         alignItems: "center",
@@ -90,46 +33,79 @@ const ItemCard = () => {
     >
       <Grid container>
         {Object.values(CategoryAlldata).map((item, index) => (
-          <Grid xs={12} sm={6} md={6} lg={4} xl={4} spacing={1}>
-            <Card
-            
-              sx={{
-                maxWidth: 450,
-                mt: 3,
-              }}
-            >
-              <CardMedia
-                component="img"
-                sx={{ height: 350 , alignContent:"center",justifyContent:"center" }}
-                image={item.imgLink}
-                title="green iguana"
-              />
+          <Grid xs={12} sm={12} md={6} lg={4} xl={4} spacing={1}>
+            <div class="container">
+              <a class="card1" href="#">
+                <CardMedia
+                  component="img"
+                  sx={{
+                    height: 320,
+                    alignContent: "center",
+                    justifyContent: "center",
+                  }}
+                  image={item.imgLink}
+                  title="green iguana"
+                />
+                <h5 className="my-3"> {item.name}</h5>
 
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {item.name}
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  {item.description}
-                </Typography>
-              </CardContent>
-
-              <CardActions>
-                <Button size="small">
+                <div class="go-corner" href="#">
+                  <div class="go-arrow">→</div>
+                </div>
+                <p class="small" variant="body1">
                   {" "}
-                  <Button size="large">
-                    <Link to={`id_category/${item.id}`} className="btn mx-2">
-                      نمایش دسته بندی
-                    </Link>
-                  </Button>
+                  {item.description}
+                </p>
+
+                <Button
+                  sx={{
+                    backgroundColor: "secondary.main",
+                    "&:hover": {
+                      backgroundColor: "secondary.dark",
+                    },
+                  }}
+                  className="button-37  "
+                  role="button"
+                >
+                  {" "}
+                  <Link to={`id_category/${item.id}`} className="btn mx-2">
+                    نمایش دسته بندی
+                  </Link>
                 </Button>
-              </CardActions>
-            </Card>
+
+                {/* <Accordion sx={{ mt: 13 }}>
+                    <AccordionSummary
+                      className="Accordion"
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                    >
+                      <Typography variant="body1">توضیحات</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography sx={{my:2 , fontSize:18}} > {item.discription}</Typography>
+
+                      <CustomDivider
+                        bColor="#primary.main"
+                        cColor="primary"
+                        icon={<DownloadDone />}
+                        align="center"
+                        text={
+                       
+                          <Link className="btn" to={"/"} >
+                               سرویس انجام شد
+                          </Link>
+                        }
+                      >
+                        {" "}
+                      </CustomDivider>
+                      <CardActions></CardActions>
+                    </AccordionDetails>
+                  </Accordion> */}
+              </a>
+            </div>
           </Grid>
         ))}
       </Grid>
     </Box>
- 
   );
 };
 

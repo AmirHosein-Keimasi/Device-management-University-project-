@@ -65,7 +65,7 @@ function addProduct($db , $id_category , $name , $discription) {
 
 function getProductList($db , $id_category) {
     try {
-        $stmt = $db->prepare("SELECT * FROM product WHERE id_category = :idC;");
+        $stmt = $db->prepare("SELECT product.id as product_id , product.id_category , product.name , product.discription , category.name FROM product INNER JOIN category ON product.id_category = category.id WHERE id_category = :idC;");
         $stmt->bindParam(':idC', $id_category, PDO::PARAM_STR);
 
         $stmt->execute();

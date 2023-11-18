@@ -3,14 +3,16 @@ import ItemCard from "./ItemCard";
 import MainContainer from "./DividereContainer";
 import { Helmet } from "react-helmet-async";
 
-const MainPage = ({ helmetTitle }) => {
+
+const MainPage = ({ helmetTitle, CategoryAlldata }) => {
   return (
     <>
       <Helmet>
         <title>{helmetTitle}</title>
       </Helmet>
       <MainContainer />
-      <ItemCard />
+      <ItemCard CategoryAlldata={CategoryAlldata} />
+   
     </>
   );
 };
