@@ -1,28 +1,21 @@
 import { COMMENT, PURPLE } from "../Layouts/Themes/colors";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { contactSchema } from "../Validation/contactValidation";
 import CustomDivider from "../Constants/CustomDivider";
 import { Add } from "@mui/icons-material";
-import Lottie from "react-lottie";
-import * as iGafVbshdn from "../Assets/iGafVbshdn.json";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import DateTimerPicker from "./DateTimerPicker";
 import { useEffect, useState } from "react";
-import { getCategorys } from "../Container/Contactsservises";
 import { Helmet } from "react-helmet-async";
-import { Box, Slide } from "@mui/material";
+import { Button, Slide } from "@mui/material";
+import FormPng from "../Assets/FormPng.png";
+
 import "../App.css";
+import { addProduct } from "../Server/servises";
+import { Box } from "dracula-ui";
 
-const AddItem = ({ helmetTitle }) => {
-  const [CategoryAlldata, setCategorydata] = useState([]);
+const AddItem = ({ helmetTitle, CategoryAlldata }) => {
   const [loading, setLoading] = useState(false);
-
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: iGafVbshdn,
-  };
 
   useEffect(() => {
     setLoading(true);
@@ -32,21 +25,25 @@ const AddItem = ({ helmetTitle }) => {
     };
   }, []);
 
-  useEffect(() => {
-    const fetchDate = async () => {
-      try {
-        const { data } = await getCategorys();
-        setCategorydata(data);
-        // console.log(CategoryAlldata);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const createContactForm = async (values) => {
+    // values.preventDefault();
+    try {
+      // setLoading((prevLoading) => !prevLoading);                      refactor white immer
 
-    return () => {
-      fetchDate();
-    };
-  }, []);
+      // await contactSchema.validate(contact,{abortEarly:false})
+      const { status, data } = await addProduct(values);
+      if (status === 201) {
+        // const allContacts = [...contacts, data];                         refactor white immer
+        // setContacts(allContacts);
+        // setFilterdContacts(allContacts);
+
+        Navigate("./");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -59,39 +56,35 @@ const AddItem = ({ helmetTitle }) => {
         align="center"
         text={"اضافه کردن یک ایتم"}
       />
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-around"
-        alignItems="center"
-  
-      >
-        <Grid xs={6} sm={6} md={6} lg={6} xl={8} sx={{ mt: 1, ml: 100 }}>
-          <Box
-            sx={{
-              position: "absolute",
-              zIndex: "-1",
-              opacity: "80%",
-            }}
-          >
-
-            {/* aks */}
-          </Box>
-
-          {/* <img
-            src={gorbe}
+      <Grid direction="row" justifyContent="center" alignItems="center">
+        <Grid
+          spacing={1}
+          sx={{
+            display: {
+              md: "block",
+              xs: "none",
+              sm: "none",
+              xl: "block",
+              lg: "block",
+            },
+          }}
+        >
+          <img
+            src={FormPng}
             height="400px"
             style={{
+              justifyContent: "center",
+
               position: "absolute",
               zIndex: "-1",
               left: "100px",
-              opacity: "50%",
+              opacity: "80%",
             }}
-          /> */}
+          />
         </Grid>
 
-        <Grid xs={6} sm={6} md={4} lg={4} xl={4}>
-          <div className="row mt-5">
+        <Grid xs={12} sm={12} md={12} lg={4} xl={4}>
+          <div className="row mt-5 d-flex m-5">
             <div className="col-md-6">
               {/* {errors?.map((error,index)=>(
                     <p key={index} className="text-danger">{error.message}</p>
@@ -99,11 +92,8 @@ const AddItem = ({ helmetTitle }) => {
               <Formik
                 initialValues={{
                   name: "",
-                  daysLeft: "",
-                  periodService: "",
-                  CreateAt: "",
-                  discription: "",
                   categorys: "",
+                  discription: "",
                 }}
                 validationSchema={contactSchema}
                 onSubmit={(values) => {
@@ -115,7 +105,7 @@ const AddItem = ({ helmetTitle }) => {
                     direction="right"
                     in={loading}
                     style={{
-                      transitionDelay: loading ? "350ms" : "0ms",
+                      transitionDelay: loading ? "400ms" : "0ms",
                     }}
                   >
                     <div className="mb-2">
@@ -133,93 +123,12 @@ const AddItem = ({ helmetTitle }) => {
                       />
                     </div>
                   </Slide>
-                  {/* <div className="mb-2">
-                    <Field
-                      name="photo"
-                      type="text"
-                      className="form-control"
-                      placeholder="آدرس تصویر"
-                    />
 
-                    <ErrorMessage
-                      name="photo"
-                      render={(msg) => <div className="text-danger">{msg}</div>}
-                    />
-                  </div> */}
                   <Slide
                     direction="right"
                     in={loading}
                     style={{
-                      transitionDelay: loading ? "450ms" : "0ms",
-                    }}
-                  >
-                    <div className="mb-2">
-                      <Field
-                        name="daysLeft"
-                        type="number"
-                        className="form-control"
-                        placeholder="دوره سرویس"
-                      />
-
-                      <ErrorMessage
-                        name="daysLeft"
-                        render={(msg) => (
-                          <div className="text-danger">{msg}</div>
-                        )}
-                      />
-                    </div>
-                  </Slide>
-                  <Slide
-                    direction="right"
-                    in={loading}
-                    style={{
-                      transitionDelay: loading ? "550ms" : "0ms",
-                    }}
-                  >
-                    <div className="mb-2">
-                      <Field
-                        name="email"
-                        type="email"
-                        className="form-control"
-                        placeholder="آدرس ایمیل"
-                      />
-
-                      <ErrorMessage
-                        name="email"
-                        render={(msg) => (
-                          <div className="text-danger">{msg}</div>
-                        )}
-                      />
-                    </div>
-                  </Slide>
-                  <Slide
-                    direction="right"
-                    in={loading}
-                    style={{
-                      transitionDelay: loading ? "650ms" : "0ms",
-                    }}
-                  >
-                    <div className="mb-2">
-                      <Field
-                        name="job"
-                        type="text"
-                        className="form-control"
-                        placeholder="شغل"
-                      />
-
-                      <ErrorMessage
-                        name="job"
-                        render={(msg) => (
-                          <div className="text-danger">{msg}</div>
-                        )}
-                      />
-                    </div>
-                  </Slide>
-                  <Slide
-                    direction="right"
-                    in={loading}
-                    style={{
-                      transitionDelay: loading ? "750ms" : "0ms",
+                      transitionDelay: loading ? "500ms" : "0ms",
                     }}
                   >
                     <div className="mb-2">
@@ -228,10 +137,14 @@ const AddItem = ({ helmetTitle }) => {
                         as="select"
                         className="form-control"
                       >
-                        <option value="">انتخاب گروه</option>
+                        <option value="">انتخاب دسته بندی </option>
                         {CategoryAlldata.length > 0 &&
                           CategoryAlldata.map((group) => (
-                            <option key={group.id} value={group.name}>
+                            <option
+                              key={group.id}
+                              value={group.name}
+                              className="p-4 m-2"
+                            >
                               {group.name}
                             </option>
                           ))}
@@ -245,25 +158,56 @@ const AddItem = ({ helmetTitle }) => {
                       />
                     </div>
                   </Slide>
-                  <DateTimerPicker />
+                  <Slide
+                    direction="right"
+                    in={loading}
+                    style={{
+                      transitionDelay: loading ? "600ms" : "0ms",
+                    }}
+                  >
+                    <div className="mb-2">
+                      <Field
+                        name="description"
+                        
+                        type="discription"
+                        className="form-control"
+                        placeholder=" توضیحات"
+                      />
+
+                      <ErrorMessage
+                        name="description"
+                        render={(msg) => (
+                          <div className="text-danger">{msg}</div>
+                        )}
+                      />
+                    </div>
+                  </Slide>
                 </Form>
               </Formik>
-
-              <div className="mt-4">
-                <input
-                  type="submit"
-                  className="btn"
-                  style={{ backgroundColor: PURPLE }}
-                  value="ساخت مخاطب"
-                />
-                <Link
-                  to={"/"}
-                  className="btn mx-2"
-                  style={{ backgroundColor: COMMENT }}
-                >
-                  انصراف
-                </Link>
-              </div>
+              <Slide
+                direction="right"
+                in={loading}
+                style={{
+                  transitionDelay: loading ? "850ms" : "0ms",
+                }}
+              >
+                <div className="mt-">
+                  <Link  type="submit"
+                    to={"/"}
+                    className="btn mx-2"
+                    style={{ backgroundColor: PURPLE }}
+                  >
+                    ایتم ساخته شد{" "}
+                  </Link>
+                  <Link
+                    to={"/"}
+                    className="btn mx-2"
+                    style={{ backgroundColor: COMMENT }}
+                  >
+                    انصراف
+                  </Link>
+                </div>
+              </Slide>
             </div>
           </div>
         </Grid>
