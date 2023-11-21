@@ -63,8 +63,8 @@ p {
     position: relative;
     max-width: 500px;
     background-color: #f2f8f9;
-    border-radius: 10px;
-    padding: 32px 24px;
+    border-radius: 15px;
+    padding: 25px 25px;
     margin: 12px;
     text-decoration: none;
     z-index: 0;
@@ -134,4 +134,24 @@ p {
 
 @media (min-width: 768px) {
     .button-37 {}
+}
+
+@media (max-width:1075px) {
+    .FormPng {
+        width: 420px;
+        height: 330px;
+    }
+}
+
+@media (max-width:970px) {
+    .FormPng {
+        width: 380px;
+        height: 270px;
+    }
+}
+
+@media (max-width:1060px) {
+    .btn-Service {
+        width: 75px;
+    }
 }

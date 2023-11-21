@@ -11,7 +11,7 @@ const DividereContainer = () => {
     <>
      
         <Grid container>
-          <Grid  xs={12} sm={6} md={6} lg={6} xl={6} sx={{mb:1}}>
+          <Grid item xs={12} sm={6} md={6}  xl={6} sx={{mb:1}} >
             <CustomDivider
             
               bColor="#primary.main"
@@ -23,7 +23,7 @@ const DividereContainer = () => {
               {" "}
             </CustomDivider>
           </Grid>
-          <Grid  xs={12} sm={6} md={6} lg={6} xl={6} sx={{}}>
+          <Grid item xs={12} sm={6} md={6}  xl={6} sx={{}}>
             <CustomDivider
               bColor="#primary.main"
               cColor="primary"

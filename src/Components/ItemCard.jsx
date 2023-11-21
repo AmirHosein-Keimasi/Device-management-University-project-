@@ -31,27 +31,28 @@ const ItemCard = ({ CategoryAlldata }) => {
         m: 3,
       }}
     >
-      <Grid container>
+      <Grid container spacing={1}>
         {Object.values(CategoryAlldata).map((item, index) => (
-          <Grid xs={12} sm={12} md={6} lg={4} xl={4} spacing={1}>
-            <div class="container">
-              <a class="card1" href="#">
+          <Grid item xs={12} sm={12} md={6}  xl={4} key={index}  >
+            <div className="container"> 
+              <a className="card1" >
                 <CardMedia
                   component="img"
                   sx={{
                     height: 320,
                     alignContent: "center",
                     justifyContent: "center",
+                    borderRadius:"10px"
                   }}
                   image={item.imgLink}
                   title="green iguana"
                 />
                 <h5 className="my-3"> {item.name}</h5>
 
-                <div class="go-corner" href="#">
-                  <div class="go-arrow">→</div>
+                <div className="go-corner" href="#">
+                  <div className="go-arrow">→</div>
                 </div>
-                <p class="small" variant="body1">
+                <p className="small" variant="body1">
                   {" "}
                   {item.description}
                 </p>

@@ -1,11 +1,7 @@
 import {
-  Card,
   CardActions,
-  CardContent,
   Accordion,
   Typography,
-  FormControlLabel,
-  Checkbox,
   AccordionDetails,
   AccordionSummary,
   Box,
@@ -17,7 +13,7 @@ import { getProduct } from "../Server/servises";
 import { Helmet } from "react-helmet-async";
 import "./Card.css";
 import CustomDivider from "../Constants/CustomDivider";
-import { Add, DownloadDone } from "@mui/icons-material";
+import { ArrowDownward, DownloadDone } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
@@ -38,14 +34,14 @@ const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
       fetchDate();
     };
   }, []);
-  console.log(Product);
+
   return (
     <>
       <Helmet>
         <title>{helmetTitle}</title>
       </Helmet>
 
-      <Box 
+      <Box
         sx={{
           display: "flex",
           alignItems: "center",
@@ -53,15 +49,15 @@ const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
           m: 3,
         }}
       >
-        <Grid container className="body">
+        <Grid container className="body" spacing={1}>
           {Object.values(Product).map((item, index) => (
-            <Grid xs={12} sm={6} md={4} lg={4} xl={4} spacing={1} >
-              <div class="container">
-                <a class="card1" href="#">
+            <Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={index}>
+              <div className="container">
+                <h4 className="card1">
                   <h3> {item.product_name}</h3>
-                  <p class="small">{item.category}</p>
-                  <div class="go-corner" href="#">
-                    <div class="go-arrow">→</div>
+                  <p className="small">{item.category}</p>
+                  <div className="go-corner" href="#">
+                    <div className="go-arrow">→</div>
                   </div>
 
                   <Accordion sx={{ mt: 13 }}>
@@ -70,29 +66,32 @@ const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
                       aria-controls="panel1a-content"
                       id="panel1a-header"
                     >
-                      <Typography variant="body1">توضیحات</Typography>
+                      <Typography variant="body1">
+                        توضیحات
+                        <ArrowDownward />
+                      </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Typography sx={{my:2 , fontSize:18}} > {item.discription}</Typography>
+                      <Typography sx={{ my: 2, fontSize: 18 }}>
+                        {" "}
+                        {item.discription}
+                      </Typography>
 
                       <CustomDivider
                         bColor="#primary.main"
                         cColor="primary"
-                        icon={<DownloadDone />}
+                        icon={<DownloadDone sx={{right:5}}/>}
                         align="center"
                         text={
-                       
-                          <Link className="btn" to={"/"} >
-                               سرویس انجام شد
+                          <Link className="btn btn-Service" to={"/"}>
+                            سرویس انجام شد
                           </Link>
                         }
-                      >
-                        {" "}
-                      </CustomDivider>
+                      ></CustomDivider>
                       <CardActions></CardActions>
                     </AccordionDetails>
                   </Accordion>
-                </a>
+                </h4>
               </div>
             </Grid>
           ))}

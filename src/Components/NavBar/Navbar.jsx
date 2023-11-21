@@ -16,24 +16,20 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-
 import { Link } from "react-router-dom";
 
-import CustomDivider from "../../Constants/CustomDivider";
-
 export default function DrawerAppBar({ CategoryAlldata }) {
-  const [open, setOpen] = useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
+  const [rendring, setrendring] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+  
+    const refreshPage = () => {
+      window.location.reload();
+    };
+  
   const drawerWidth = 240;
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -56,7 +52,11 @@ export default function DrawerAppBar({ CategoryAlldata }) {
           <ListItem key={item.name} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <Link to={`id_category/${item.id}`} className="btn ">
+                <Link
+                 
+                  to={`id_category/${item.id}`}
+                  className="btn "
+                >
                   <ListItemText primary={item.name} />
                   <Divider></Divider>
                 </Link>
@@ -85,11 +85,7 @@ export default function DrawerAppBar({ CategoryAlldata }) {
                 display: { xs: "flex", sm: "flex" },
               }}
             >
-              <Typography
-            variant="h4"
-              >
-                 
-              </Typography>
+              <Typography variant="h4"></Typography>
               {/* Selection */}
             </Stack>
             <nav>
@@ -100,7 +96,7 @@ export default function DrawerAppBar({ CategoryAlldata }) {
                     backgroundColor: "gray",
                   },
                 }}
-                anchor="l"
+                anchor="left"
                 variant="temporary"
                 open={mobileOpen}
                 onClose={handleDrawerToggle}
@@ -121,7 +117,7 @@ export default function DrawerAppBar({ CategoryAlldata }) {
             <IconButton
               color="inherit"
               aria-label="open drawer"
-              edge="right"
+              edge="start"
               onClick={handleDrawerToggle}
               sx={{ display: { sm: "none" }, mr: 40 }}
             >
