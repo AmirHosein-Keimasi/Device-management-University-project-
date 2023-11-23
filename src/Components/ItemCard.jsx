@@ -3,7 +3,11 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import "./Card.css";
 
+
 const ItemCard = ({ CategoryAlldata }) => {
+  
+
+
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -34,7 +38,7 @@ const ItemCard = ({ CategoryAlldata }) => {
       <Grid container spacing={1}>
         {Object.values(CategoryAlldata).map((item, index) => (
           <Grid item xs={12} sm={12} md={6}  xl={4} key={index}  >
-            <div className="container"> 
+            <div  className="container"> 
               <a className="card1" >
                 <CardMedia
                   component="img"
@@ -72,35 +76,6 @@ const ItemCard = ({ CategoryAlldata }) => {
                     نمایش دسته بندی
                   </Link>
                 </Button>
-
-                {/* <Accordion sx={{ mt: 13 }}>
-                    <AccordionSummary
-                      className="Accordion"
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography variant="body1">توضیحات</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography sx={{my:2 , fontSize:18}} > {item.discription}</Typography>
-
-                      <CustomDivider
-                        bColor="#primary.main"
-                        cColor="primary"
-                        icon={<DownloadDone />}
-                        align="center"
-                        text={
-                       
-                          <Link className="btn" to={"/"} >
-                               سرویس انجام شد
-                          </Link>
-                        }
-                      >
-                        {" "}
-                      </CustomDivider>
-                      <CardActions></CardActions>
-                    </AccordionDetails>
-                  </Accordion> */}
               </a>
             </div>
           </Grid>

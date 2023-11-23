@@ -12,3 +12,7 @@
         /* Your styles for md size and smaller */
     }
 }
+
+* {
+    z-index: 3;
+}

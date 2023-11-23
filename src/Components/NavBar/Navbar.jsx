@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   Divider,
@@ -16,20 +17,19 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import FabBack from "../FabBack";
+import { Button } from "dracula-ui";
 
 export default function DrawerAppBar({ CategoryAlldata }) {
-  const [rendring, setrendring] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
-  
-    const refreshPage = () => {
-      window.location.reload();
-    };
-  
+  const handleClick = (id) => {
+    navigate(`id_category/${id}`);
+  };
   const drawerWidth = 240;
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -52,14 +52,10 @@ export default function DrawerAppBar({ CategoryAlldata }) {
           <ListItem key={item.name} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <Link
-                 
-                  to={`id_category/${item.id}`}
-                  className="btn "
-                >
+                <Button onClick={() => handleClick(item.id)} className="btn ">
                   <ListItemText primary={item.name} />
                   <Divider></Divider>
-                </Link>
+                </Button>
               </ListItemIcon>
             </ListItemButton>
           </ListItem>
@@ -143,6 +139,7 @@ export default function DrawerAppBar({ CategoryAlldata }) {
           <Toolbar />
         </Box>
       </Box>
+      <FabBack />
     </>
   );
 }

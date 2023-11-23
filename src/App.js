@@ -7,11 +7,19 @@ import NearestService from "./Components/NearestService";
 import NotFound from "./Components/NotFound";
 import ViewItem from "./Components/ViewItem";
 import Mainlayouts from "./Layouts/Themes/Mainlayouts";
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useCallback} from "react";
 import { getcategorys } from "./Server/servises";
-
+import Particles from "react-particles";
+import { loadFull } from "tsparticles";
+import { links } from "./Components/particles";
 function App() {
+  const particlesInit = useCallback(async (engine) => {
+    await loadFull(engine);
+  }, []);
 
+  const particlesLoaded = useCallback(async (container) => {
+    await console.log(container);
+  }, []);
   const [CategoryAlldata, setCategorydata] = useState([]);
 
 
@@ -45,6 +53,12 @@ function App() {
 
   return (
     <>
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        loaded={particlesLoaded}
+        options={links}
+      />
       <Mainlayouts mode={mode}>
         <Navbar CategoryAlldata={CategoryAlldata} handelThemeCheng={handelThemeCheng} />
         <Routes>

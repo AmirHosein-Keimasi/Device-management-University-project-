@@ -1,4 +1,3 @@
-import { Navigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { contactSchema } from "../Validation/contactValidation";
 import CustomDivider from "../Constants/CustomDivider";
@@ -11,14 +10,12 @@ import {
   InputAdornment,
   Slide,
   TextField,
-  Alert,
 } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
 import FormPng from "../Assets/FormPng.png";
 import "../App.css";
 import { addProduct } from "../Server/servises";
 import { useEffect, useState } from "react";
-import SucAlert from "./SucAlert";
-import ErrorAlert from "./ErrorAlert";
 
 const AddItem = ({ helmetTitle, CategoryAlldata }) => {
   const [loading, setLoading] = useState(false);
@@ -33,29 +30,59 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
 
   const addProductForm = async (categorys, nameProduct, discription) => {
     try {
-      const { status } = await addProduct(categorys, nameProduct, discription);
-      if (status === 200) {
+      const result = await addProduct(categorys, nameProduct, discription);
+      if (result) {
+        console.log(result);
+        toast.success("ایتم مورد نظر ثبت شد ", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       }
     } catch (error) {
       console.log(error.message);
+      toast.error("خطا در افزودن محصول!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   };
 
   const contactInputNames = { categorys: "", nameProduct: "", discription: "" };
   const formik = useFormik({
     initialValues: contactInputNames,
-    onSubmit: (values) => {
-      addProductForm(
-        values.categorys,
-        values.nameProduct,
-        values.discription
-      );
+    onSubmit: (values, { resetForm }) => {
+      addProductForm(values.categorys, values.nameProduct, values.discription);
+      resetForm();
     },
     validationSchema: contactSchema,
   });
 
   return (
     <>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <Helmet>
         <title>{helmetTitle}</title>
       </Helmet>{" "}
@@ -254,129 +281,3 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
 };
 
 export default AddItem;
-
-// <div className="row mt-5 d-flex m-5">
-//           <div className="col-md-6">
-//             {/* {errors?.map((error,index)=>(
-//                   <p key={index} className="text-danger">{error.message}</p>
-//                 ))} */}
-//             <Formik
-//               initialValues={{
-//                 name: "",
-//                 categorys: "",
-//                 discription: "",
-//               }}
-//               validationSchema={contactSchema}
-//               onSubmit={(values) => {
-//                 createContactForm(values);
-//               }}
-//             >
-//               <Form>
-//                 <Slide
-//                   direction="right"
-//                   in={loading}
-//                   style={{
-//                     transitionDelay: loading ? "400ms" : "0ms",
-//                   }}
-//                 >
-//                   <div className="mb-2">
-//                     <Field
-//                       name="name"
-//                       type="text"
-//                       className="form-control"
-//                       placeholder="نام ایتم"
-//                     />
-//                     <ErrorMessage
-//                       name="name"
-//                       render={(msg) => (
-//                         <div className="text-danger">{msg}</div>
-//                       )}
-//                     />
-//                   </div>
-//                 </Slide>
-
-//                 <Slide
-//                   direction="right"
-//                   in={loading}
-//                   style={{
-//                     transitionDelay: loading ? "500ms" : "0ms",
-//                   }}
-//                 >
-//                   <div className="mb-2">
-//                     <Field
-//                       name="categorys"
-//                       as="select"
-//                       className="form-control"
-//                     >
-//                       <option value="">انتخاب دسته بندی </option>
-//                       {CategoryAlldata.length > 0 &&
-//                         CategoryAlldata.map((group) => (
-//                           <option
-//                             key={group.id}
-//                             value={group.name}
-//                             className="p-4 m-2"
-//                           >
-//                             {group.name}
-//                           </option>
-//                         ))}
-//                     </Field>
-
-//                     <ErrorMessage
-//                       name="categorys"
-//                       render={(msg) => (
-//                         <div className="text-danger">{msg}</div>
-//                       )}
-//                     />
-//                   </div>
-//                 </Slide>
-//                 <Slide
-//                   direction="right"
-//                   in={loading}
-//                   style={{
-//                     transitionDelay: loading ? "600ms" : "0ms",
-//                   }}
-//                 >
-//                   <div className="mb-2">
-//                     <Field
-//                       name="description"
-//                       type="discription"
-//                       className="form-control"
-//                       placeholder=" توضیحات"
-//                     />
-
-//                     <ErrorMessage
-//                       name="description"
-//                       render={(msg) => (
-//                         <div className="text-danger">{msg}</div>
-//                       )}
-//                     />
-//                   </div>
-//                 </Slide>
-//               </Form>
-//             </Formik>
-//             <Slide
-//               direction="right"
-//               in={loading}
-//               style={{
-//                 transitionDelay: loading ? "850ms" : "0ms",
-//               }}
-//             >
-//               <div className="mt-">
-//                 <input
-//                   type="submit"
-//                   value="ساخت مخاطب"
-//                   className="btn mx-2"
-//                   style={{ backgroundColor: PURPLE }}
-//                 >
-//                 </input>
-//                 <Link
-//                   to={"/"}
-//                   className="btn mx-2"
-//                   style={{ backgroundColor: COMMENT }}
-//                 >
-//                   انصراف
-//                 </Link>
-//               </div>
-//             </Slide>
-//           </div>
-//         </div>

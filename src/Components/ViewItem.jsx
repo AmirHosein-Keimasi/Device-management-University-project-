@@ -5,6 +5,8 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
+  Button,  InputAdornment,
+  TextField,
   Grid,
 } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -12,9 +14,10 @@ import { useParams } from "react-router";
 import { getProduct } from "../Server/servises";
 import { Helmet } from "react-helmet-async";
 import "./Card.css";
-import CustomDivider from "../Constants/CustomDivider";
-import { ArrowDownward, DownloadDone } from "@mui/icons-material";
+import DateTimerPicker from "./DateTimerPicker";
+import { ArrowDownward, Chat, DownloadDone } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import FabBack from "./FabBack";
 
 const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
   const [Product, setProduct] = useState([]);
@@ -52,7 +55,7 @@ const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
         <Grid container className="body" spacing={1}>
           {Object.values(Product).map((item, index) => (
             <Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={index}>
-              <div className="container">
+              <div className="container" id="myDiv">
                 <h4 className="card1">
                   <h3> {item.product_name}</h3>
                   <p className="small">{item.category}</p>
@@ -60,34 +63,64 @@ const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
                     <div className="go-arrow">→</div>
                   </div>
 
-                  <Accordion sx={{ mt: 13 }}>
+                  <Typography>
+                    اخرین سرویس انجام شده در تاریخ :{item.category}
+                  </Typography>
+
+                  <Typography sx={{ my: 2, fontSize: 18 }}>
+                    {" "}
+                    {item.discription}
+                  </Typography>
+                  <Accordion sx={{ mt: 13 , borderRadius:"8px"}}>
                     <AccordionSummary
                       className="Accordion"
                       aria-controls="panel1a-content"
                       id="panel1a-header"
                     >
                       <Typography variant="body1">
-                        توضیحات
-                        <ArrowDownward />
+                        ثبت سرویس جدید <ArrowDownward />
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Typography sx={{ my: 2, fontSize: 18 }}>
-                        {" "}
-                        {item.discription}
-                      </Typography>
+                      <DateTimerPicker   />
 
-                      <CustomDivider
-                        bColor="#primary.main"
-                        cColor="primary"
-                        icon={<DownloadDone sx={{right:5}}/>}
-                        align="center"
-                        text={
-                          <Link className="btn btn-Service" to={"/"}>
-                            سرویس انجام شد
-                          </Link>
-                        }
-                      ></CustomDivider>
+                      {/*  */}
+
+                      <TextField
+                    sx={{ mb: 0.5 }}
+                    fullWidth
+                    multiline
+                    rows={6}
+                    color="secondary"
+                    label="توضیحات"
+                    name="discription"
+                    variant="outlined"
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment postion="end">
+                          <Chat color="secondary" />
+                        </InputAdornment>
+                      ),
+                    }}></TextField>
+                      <Button
+                        sx={{
+                          alignItems:'center',
+                          color: "secondary.main",
+                          backgroundColor: "secondary.main",
+                          "&:hover": {
+                            backgroundColor: "secondary.dark",
+                            color: "secondary.dark",
+                          },
+                        }}
+                        className="button-37  "
+                    
+                      >
+                        {" "}
+                        <Link className="btn " to={"/"}>
+                          سرویس انجام شد <DownloadDone />
+                        </Link>
+                      </Button>
+
                       <CardActions></CardActions>
                     </AccordionDetails>
                   </Accordion>
@@ -97,6 +130,7 @@ const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
           ))}
         </Grid>
       </Box>
+      <FabBack />
     </>
   );
 };

@@ -8,9 +8,17 @@ const FabAdd = () => {
     <>
       <Box sx={{ "& > :not(style)": { m: 1 } }}>
         <Fab
-          color="primary"
           aria-label="add"
-          sx={{ position: "fixed", bottom: 16, right: 16 }}
+          sx={{
+            position: "fixed",
+            bottom: 16,
+            right: 16,
+            backgroundColor: "#00838d",
+
+            "&:hover": {
+              backgroundColor: "#005e65",
+            },
+          }}
         >
           <Link className="btn" to={"/MainPage/add"}>
             {" "}

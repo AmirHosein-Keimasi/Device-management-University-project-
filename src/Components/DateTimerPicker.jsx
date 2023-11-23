@@ -18,11 +18,11 @@ export default function AdapterJalali() {
 
   
   return (
-    <ThemeProvider theme={theme}  className="form-control">
+    <ThemeProvider theme={theme}  >
       <div dir="rtl">
         <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
-          <DatePicker
-            label=""
+          <DatePicker sx={{ mb: 3 , borderRadius:"5px"}}
+           
             defaultValue={new Date(2023, 10, 1)}
             onChange={handelGetDate}  className="form-control"
           />

@@ -1,10 +1,13 @@
-import React from "react";
+import { useCallback } from "react";
 import ItemCard from "./ItemCard";
 import MainContainer from "./DividereContainer";
 import { Helmet } from "react-helmet-async";
 import FabAdd from "./FabAdd";
 
+
 const MainPage = ({ helmetTitle, CategoryAlldata }) => {
+ 
+
   return (
     <>
       <Helmet>
