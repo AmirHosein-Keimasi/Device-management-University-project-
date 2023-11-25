@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { contactSchema } from "../Validation/contactValidation";
+import { FornSchema, contactSchema } from "../Validation/contactValidation";
 import CustomDivider from "../Constants/CustomDivider";
 import { Add, Chat, Devices } from "@mui/icons-material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
@@ -9,6 +9,7 @@ import {
   CardContent,
   InputAdornment,
   Slide,
+  Typography,
   TextField,
 } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
@@ -16,6 +17,7 @@ import FormPng from "../Assets/FormPng.png";
 import "../App.css";
 import { addProduct } from "../Server/servises";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const AddItem = ({ helmetTitle, CategoryAlldata }) => {
   const [loading, setLoading] = useState(false);
@@ -66,7 +68,7 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
       addProductForm(values.categorys, values.nameProduct, values.discription);
       resetForm();
     },
-    validationSchema: contactSchema,
+    validationSchema: FornSchema,
   });
 
   return (
@@ -89,14 +91,18 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
       <CustomDivider
         bColor="#primary.main"
         cColor="primary"
-        icon={<Add />}
         align="center"
-        text={"اضافه کردن یک ایتم"}
+        CustomDivider
+        text={<h5 className="btn CustomDivider" to={""}>
+        {" "}
+        <Add  />  اضافه کردن یک ایتم  
+      </h5>
+        }
       />
-      <form autoComplete="off" onSubmit={formik.handleSubmit}>
+      <form autoComplete="off" className="addForm" onSubmit={formik.handleSubmit} >
         <CardContent
           sx={{
-            flexDirection: "column",
+            flexDirection: "column"
           }}
         >
           <Grid container>
@@ -236,9 +242,9 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
                 >
                   <Button
                     type="submit"
-                    color="success"
+                    color="secondary"
                     variant="contained"
-                    sx={{ mt: 2 }}
+                    sx={{ mt: 2, py: 2 }}
                     fullWidth
                   >
                     ارسال کن
@@ -267,7 +273,7 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
                   justifyContent: "center",
 
                   position: "absolute",
-                  zIndex: "-1",
+                 
                   left: "100px",
                   opacity: "80%",
                 }}

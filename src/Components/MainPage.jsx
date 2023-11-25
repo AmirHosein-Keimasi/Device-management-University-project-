@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import ItemCard from "./ItemCard";
 import MainContainer from "./DividereContainer";
 import { Helmet } from "react-helmet-async";
@@ -16,6 +15,7 @@ const MainPage = ({ helmetTitle, CategoryAlldata }) => {
       <MainContainer />
       <ItemCard CategoryAlldata={CategoryAlldata} />
       <FabAdd />
+     
     </>
   );
 };

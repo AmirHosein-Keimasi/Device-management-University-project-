@@ -1,158 +1,208 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
-.body {
-    transition: all 0.7s ease-out;
-    height: 100%;
-}
-
-.container {
-    font-size: 20px;
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
-
-h5 {
-    color: #262626;
-    font-size: 19px;
-    line-height: 24px;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-p {
-    margin-top: 5px;
-    font-size: 17px;
-    font-weight: 400;
-    line-height: 20px;
-    color: #666666;
-    &.small {
-        font-size: 17px;
-    }
-}
-
-.go-corner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    width: 32px;
-    height: 32px;
-    overflow: hidden;
-    top: 0;
-    right: 0;
-    background-color: #00838d;
-    border-radius: 0 4px 0 32px;
-}
-
-.go-arrow {
-    margin-top: -4px;
-    margin-right: -4px;
-    color: white;
-    font-family: courier, sans;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.card1 {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    height: auto;
-    width: auto;
-    display: block;
-    position: relative;
-    max-width: 500px;
-    background-color: #f2f8f9;
-    border-radius: 15px;
-    padding: 25px 25px;
-    margin: 12px;
-    text-decoration: none;
-    z-index: 0;
-    overflow: hidden;
-    &:before {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        top: -16px;
-        right: -16px;
-        background: #00838d;
-        height: 32px;
-        width: 32px;
-        border-radius: 32px;
-        transform: scale(1);
-        transform-origin: 80% 50%;
-        transition: transform 0.25s ease-out;
-    }
-    &:hover:before {
-        transform: scale(21);
-    }
-}
-
-.card1:hover {
-    p {
-        transition: all 0.3s ease-out;
-        color: rgba(255, 255, 255, 0.8);
-    }
-    h5 {
-        transition: all 0.3s ease-out;
-        color: #ffffff;
-    }
-}
-
-.Accordion {
-    font-size: 19px;
-    border: #00848d7f 1px 4px 4px 1px;
-}
-
-
-/* Button Style */
-
-.button-37 {
-    margin: 1rem;
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont, sans-serif;
-    width: auto;
-    height: auto;
-    text-decoration: none;
-    outline: 0;
-    text-align: center;
-    transform: translateY(0);
-    transition: transform 150ms, box-shadow 150ms;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-}
-
-.button-37:hover {
-    box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
-    transform: translateY(-3px);
-    color: whitesmoke
-}
-
-@media (min-width: 768px) {
-    .button-37 {}
-}
-
-@media (max-width:1075px) {
-    .FormPng {
-        width: 420px;
-        height: 330px;
-    }
-}
-
-@media (max-width:970px) {
-    .FormPng {
-        width: 380px;
-        height: 270px;
-    }
-}
-
-@media (max-width:1060px) {
-    .btn-Service {
-        width: 75px;
-    }
-}
+        @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+        .body {
+            transition: all 0.7s ease-out;
+            height: 100%;
+        }
+        
+        .container {
+            font-size: 20px;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container:hover {
+            color: #262626;
+        }
+        
+        .card1:hover {}
+        
+        h5 {
+            color: #262626;
+            font-size: 19px;
+            line-height: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            margin-top: 5px;
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #666666;
+            &.small {
+                font-size: 17px;
+            }
+        }
+        
+        .go-corner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            overflow: hidden;
+            top: 0;
+            right: 0;
+            background-color: #00838d;
+            border-radius: 0 4px 0 32px;
+        }
+        
+        .go-arrow {
+            margin-top: -4px;
+            margin-right: -4px;
+            color: white;
+            font-family: courier, sans;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .card2 {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            height: auto;
+            width: auto;
+            display: block;
+            position: relative;
+            max-width: 500px;
+            background-color: #f2f8f9;
+            border-radius: 15px;
+            padding: 25px 25px;
+            margin: 12px;
+            text-decoration: none;
+            z-index: 0;
+            overflow: hidden;
+            &:before {
+                content: "";
+                position: absolute;
+                z-index: -1;
+                top: -16px;
+                right: -16px;
+                background: #00838d;
+                height: 32px;
+                width: 32px;
+                border-radius: 32px;
+                transform: scale(1);
+                transform-origin: 80% 50%;
+                transition: transform 0.25s ease-out;
+                color: #262626
+            }
+            &:hover:before {
+                transform: scale(21);
+                color: #262626
+            }
+        }
+        
+        .card1 {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            height: auto;
+            width: auto;
+            display: block;
+            position: relative;
+            max-width: 500px;
+            background-color: #f2f8f9;
+            border-radius: 15px;
+            padding: 25px 25px;
+            margin: 12px;
+            text-decoration: none;
+            z-index: 0;
+            overflow: hidden;
+            &:before {
+                content: "";
+                position: absolute;
+                z-index: -1;
+                top: -16px;
+                right: -16px;
+                background: #00838d;
+                height: 32px;
+                width: 32px;
+                border-radius: 32px;
+                transform: scale(1);
+                transform-origin: 80% 50%;
+                transition: transform 0.25s ease-out;
+                color: #262626
+            }
+            &:hover:before {
+                transform: scale(21);
+                color: #262626
+            }
+        }
+        
+        .servis:hover {
+            color: #262626
+        }
+        
+        .card1:not(.servis):hover p {
+            color: rgba(255, 255, 255, 0.908);
+        }
+        
+        .card1:not(.servis):hover .Divider {
+            color: rgba(255, 255, 255, 0.908);
+        }
+        
+        .Accordion {
+            border: 1px solid rgba(0, 0, 0, 0.174);
+        }
+        
+        .card1:not(.servis):hover h5 {
+            transition: all 0.3s ease-out;
+            color: #ffffff;
+        }
+        
+        .AccordionDetails {
+            font-size: 19px;
+            box-shadow: #00848d7f 2px 4px 4px;
+        }
+        /* Button Style */
+        
+        .button-37 {
+            margin: 1rem;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+            width: auto;
+            height: auto;
+            text-decoration: none;
+            outline: 0;
+            text-align: center;
+            transform: translateY(0);
+            transition: transform 150ms, box-shadow 150ms;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+        
+        .button-37:hover {
+            box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width:1075px) {
+            .FormPng {
+                width: 420px;
+                height: 330px;
+            }
+        }
+        
+        @media (max-width:970px) {
+            .FormPng {
+                width: 380px;
+                height: 270px;
+            }
+        }
+        
+        @media (max-width:1060px) {
+            .btn-Service {
+                width: 75px;
+            }
+        }
+        
+        .addForm {
+            z-index: "-100" !important
+        }

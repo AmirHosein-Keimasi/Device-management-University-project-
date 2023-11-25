@@ -11,20 +11,23 @@ export default function AdapterJalali() {
     () => createTheme({ direction: "rtl" }, existingTheme),
     [existingTheme]
   );
-
+  const [DatePick, setDatePick] = React.useState();
   const handelGetDate = (e) => {
-    console.log(new Intl.DateTimeFormat("fa-IR").format(e));
+    // console.log(new Intl.DateTimeFormat("fa-IR").format(e));
+    const date = new Date(e);
+    const timestamp = date.getTime();
+    setDatePick(timestamp);
   };
 
-  
   return (
-    <ThemeProvider theme={theme}  >
+    <ThemeProvider theme={theme}>
       <div dir="rtl">
         <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
-          <DatePicker sx={{ mb: 3 , borderRadius:"5px"}}
-           
+          <DatePicker
+            sx={{ mb: 2.5, borderRadius: "5px" }}
             defaultValue={new Date(2023, 10, 1)}
-            onChange={handelGetDate}  className="form-control"
+            onChange={handelGetDate}
+            className="form-control"
           />
         </LocalizationProvider>
       </div>

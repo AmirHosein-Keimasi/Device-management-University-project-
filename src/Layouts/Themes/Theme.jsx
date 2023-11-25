@@ -6,6 +6,9 @@ export const lightTheme = createTheme({
   direction: "rtl",
   palette: {
     mode: "light",
+    text: {
+      main: "#040D12",
+    },
     primary: {
       main: "#6272a4",
     },

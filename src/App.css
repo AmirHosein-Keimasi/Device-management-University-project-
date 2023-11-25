@@ -55,8 +55,7 @@
     border-radius: 10px;
 }
 
-.Lottie {
-    position: "absolute";
-    z-index: -1;
-    left: 100px;
+.CustomDivider:hover {
+    transform: translateY(-3px);
+    color: whitesmoke;
 }

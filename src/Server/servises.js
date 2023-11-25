@@ -24,25 +24,14 @@ export const addProduct = (itemId, ProductName, discription) => {
     discription: discription,
   });
 };
-//Get All Groups
-export const getAllGroups = () => {
-  const url = `${SERVER_URL}/groups`;
-  return axios.get(url);
+
+//Post Date Servis Product
+export const ServisProduct = (itemId, ProductName, discription) => {
+  const url = `${SERVER_URL}add_product.php?id_category=${itemId}&name_product=${ProductName}&discription=${discription}`;
+  return axios.post(url, {
+    id_category: itemId,
+    name_product: ProductName,
+    discription: discription,
+  });
 };
 
-//Get Groups
-export const getGroups = (groupstId) => {
-  const url = `${SERVER_URL}/groups/${groupstId}`;
-  return axios.get(url);
-};
-
-//PUT Update Contacts
-export const UpdateContacts = (contact, contactId) => {
-  const url = `${SERVER_URL}/contacts/${contactId}`;
-  return axios.put(url, contact);
-};
-//Delete Contacts
-export const DeleteContacts = (contactId) => {
-  const url = `${SERVER_URL}/contacts/${contactId}`;
-  return axios.delete(url);
-};

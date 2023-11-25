@@ -5,9 +5,11 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
-  Button,  InputAdornment,
+  Button,
+  InputAdornment,
   TextField,
   Grid,
+  Divider,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -18,6 +20,9 @@ import DateTimerPicker from "./DateTimerPicker";
 import { ArrowDownward, Chat, DownloadDone } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import FabBack from "./FabBack";
+import moment from "moment-jalaali";
+
+import { useFormik } from "formik";
 
 const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
   const [Product, setProduct] = useState([]);
@@ -37,6 +42,21 @@ const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
       fetchDate();
     };
   }, []);
+
+  function convertToJalali(date) {
+    return moment(date, "YYYY-M-D").format("jYYYY/jM/jD");
+  }
+
+  const formik = useFormik({
+    initialValues: {
+      Datediscription: "",
+      DateTimerPicker:''
+    },
+    onSubmit: (values, { resetForm }) => {
+      console.log(values);
+      resetForm();
+    },
+  });
 
   return (
     <>
@@ -63,66 +83,82 @@ const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
                     <div className="go-arrow">→</div>
                   </div>
 
-                  <Typography>
-                    اخرین سرویس انجام شده در تاریخ :{item.category}
+                  <Typography variant="body1">
+                    اخرین سرویس انجام شده :{" "}
+                    {convertToJalali(item.latest_service_date)}
                   </Typography>
+                  <Divider className="Divider" sx={{ my: 2 }} />
 
                   <Typography sx={{ my: 2, fontSize: 18 }}>
                     {" "}
                     {item.discription}
                   </Typography>
-                  <Accordion sx={{ mt: 13 , borderRadius:"8px"}}>
+                  <Accordion
+                    sx={{ mt: 13, borderRadius: "8px" }}
+                    className="Accordion"
+                  >
                     <AccordionSummary
-                      className="Accordion"
                       aria-controls="panel1a-content"
                       id="panel1a-header"
                     >
-                      <Typography variant="body1">
+                      <Typography
+                        className="servis"
+                        variant="caption"
+                        sx={{ fontSize: "20px" }}
+                      >
                         ثبت سرویس جدید <ArrowDownward />
                       </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
-                      <DateTimerPicker   />
+                    {/* ss */}
+                    <AccordionDetails className="AccordionDetails">
+                      <DateTimerPicker
+                        name="DateTimerPicker"
+                        value={formik.values?.DateTimerPicker}
+                        onChange={formik.handleChange}
+                      />
 
                       {/*  */}
 
-                      <TextField
-                    sx={{ mb: 0.5 }}
-                    fullWidth
-                    multiline
-                    rows={6}
-                    color="secondary"
-                    label="توضیحات"
-                    name="discription"
-                    variant="outlined"
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment postion="end">
-                          <Chat color="secondary" />
-                        </InputAdornment>
-                      ),
-                    }}></TextField>
-                      <Button
-                        sx={{
-                          alignItems:'center',
-                          color: "secondary.main",
-                          backgroundColor: "secondary.main",
-                          "&:hover": {
-                            backgroundColor: "secondary.dark",
-                            color: "secondary.dark",
-                          },
-                        }}
-                        className="button-37  "
-                    
-                      >
-                        {" "}
-                        <Link className="btn " to={"/"}>
+                      <form onSubmit={formik.handleSubmit}>
+                        <TextField
+                          sx={{ mb: 2.5, alignItems: "center" }}
+                          fullWidth
+                          multiline
+                          rows={4}
+                          color="secondary"
+                          label="توضیحات"
+                          name="Datediscription"
+                          variant="outlined"
+                          value={formik.values?.nameProduct}
+                          onChange={formik.handleChange}
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment postion="end">
+                                <Chat color="black" />
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+
+                        <Button
+                          type="submit"
+                          sx={{
+                            alignItems: "center",
+                            color: "secondary.main",
+                            backgroundColor: "secondary.main",
+                            "&:hover": {
+                              backgroundColor: "secondary.dark",
+                              color: "secondary.dark",
+                            },
+                          }}
+                          className="button-37 btn"
+                        >
                           سرویس انجام شد <DownloadDone />
-                        </Link>
-                      </Button>
+                        </Button>
+                      </form>
 
                       <CardActions></CardActions>
-                    </AccordionDetails>
+                    </AccordionDetails>{" "}
                   </Accordion>
                 </h4>
               </div>
@@ -134,43 +170,4 @@ const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
     </>
   );
 };
-
 export default ViewItem;
-
-{
-  /*              <Card  sx={{ minWidth: 275 }}>
-                <CardContent>
-                  <Typography
-                    sx={{ fontSize: 14 }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    {item.category_name}
-                  </Typography>
-                  <Typography variant="h5" sx={{ mb: 1.5 }} component="div">
-                  {item.product_name}
-                  </Typography>{" "}
-                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    روز باقی مونده سرویس
-                  </Typography>
-                  <Accordion>
-                    <AccordionSummary
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography> {item.discription}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography variant="body2">توضیحات</Typography>
-
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="سرویس شد"
-                        sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
-                      />
-                      <CardActions></CardActions>
-                    </AccordionDetails>
-                  </Accordion>
-                </CardContent>{" "}
-              </Card> */
-}

@@ -35,12 +35,13 @@ const ItemCard = ({ CategoryAlldata }) => {
         m: 3,
       }}
     >
-      <Grid container spacing={1}>
+      <Grid container >
         {Object.values(CategoryAlldata).map((item, index) => (
-          <Grid item xs={12} sm={12} md={6}  xl={4} key={index}  >
+          <Grid item xs={12} sm={6} md={4}  xl={4} key={index}  >
             <div  className="container"> 
-              <a className="card1" >
+              <a className="card2" >
                 <CardMedia
+                className=""
                   component="img"
                   sx={{
                     height: 320,
@@ -63,9 +64,11 @@ const ItemCard = ({ CategoryAlldata }) => {
 
                 <Button
                   sx={{
-                    backgroundColor: "secondary.main",
+                    backgroundColor: "#00838d",
                     "&:hover": {
-                      backgroundColor: "secondary.dark",
+                      backgroundColor: "#005e65",
+                  
+                    
                     },
                   }}
                   className="button-37  "

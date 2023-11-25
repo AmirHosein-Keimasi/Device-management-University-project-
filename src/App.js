@@ -12,13 +12,18 @@ import { getcategorys } from "./Server/servises";
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
 import { links } from "./Components/particles";
+import Media from './Components/Media.jsx'
+
 function App() {
+
+
+
   const particlesInit = useCallback(async (engine) => {
     await loadFull(engine);
   }, []);
 
   const particlesLoaded = useCallback(async (container) => {
-    await console.log(container);
+  
   }, []);
   const [CategoryAlldata, setCategorydata] = useState([]);
 
@@ -53,12 +58,12 @@ function App() {
 
   return (
     <>
-      <Particles
+      {/* <Particles
         id="tsparticles"
         init={particlesInit}
         loaded={particlesLoaded}
         options={links}
-      />
+      /> */}
       <Mainlayouts mode={mode}>
         <Navbar CategoryAlldata={CategoryAlldata} handelThemeCheng={handelThemeCheng} />
         <Routes>
@@ -87,6 +92,7 @@ function App() {
             element={<NotFound helmetTitle=" صفحه مورد نظر یافت نشد" />}
           />
         </Routes>
+        <Media/>
       </Mainlayouts>
     </>
   );

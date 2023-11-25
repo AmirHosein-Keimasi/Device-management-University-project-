@@ -15,10 +15,9 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Typography,
+  Typography,Button
 } from "@mui/material";
 import FabBack from "../FabBack";
-import { Button } from "dracula-ui";
 
 export default function DrawerAppBar({ CategoryAlldata }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -49,11 +48,11 @@ export default function DrawerAppBar({ CategoryAlldata }) {
       </Box>{" "}
       <List sx={{ textAlign: "center", alignItems: "start" }}>
         {Object.values(CategoryAlldata).map((item, index) => (
-          <ListItem key={item.name} disablePadding>
-            <ListItemButton>
+          <ListItem key={item.name } disablePadding sx={{color:"#text.main"}}>
+            <ListItemButton >
               <ListItemIcon>
-                <Button onClick={() => handleClick(item.id)} className="btn ">
-                  <ListItemText primary={item.name} />
+                <Button onClick={() => handleClick(item.id)} className="btn" >
+                  <ListItemText primary={item.name} sx={{color:"text.main"}}/>
                   <Divider></Divider>
                 </Button>
               </ListItemIcon>
