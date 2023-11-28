@@ -1,30 +1,13 @@
-import {
-  CardActions,
-  Accordion,
-  Typography,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Button,
-  InputAdornment,
-  TextField,
-  Grid,
-  Divider,
-} from "@mui/material";
+import { Typography, Box, Button, Grid, Divider } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getProduct } from "../Server/servises";
 import { Helmet } from "react-helmet-async";
-import "./Card.css";
-import DateTimerPicker from "./DateTimerPicker";
-import { ArrowDownward, Chat, DownloadDone } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import FabBack from "./FabBack";
 import moment from "moment-jalaali";
 
-import { useFormik } from "formik";
-
-const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
+const ViewItem = ({ helmetTitle }) => {
   const [Product, setProduct] = useState([]);
   const { itemId } = useParams();
 
@@ -33,11 +16,11 @@ const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
       try {
         const { data } = await getProduct(itemId);
         setProduct(data);
+       
       } catch (error) {
         console.log(error);
       }
     };
-
     return () => {
       fetchDate();
     };
@@ -46,17 +29,6 @@ const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
   function convertToJalali(date) {
     return moment(date, "YYYY-M-D").format("jYYYY/jM/jD");
   }
-
-  const formik = useFormik({
-    initialValues: {
-      Datediscription: "",
-      DateTimerPicker:''
-    },
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      resetForm();
-    },
-  });
 
   return (
     <>
@@ -75,8 +47,8 @@ const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
         <Grid container className="body" spacing={1}>
           {Object.values(Product).map((item, index) => (
             <Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={index}>
-              <div className="container" id="myDiv">
-                <h4 className="card1">
+              <div className="container w-100 " id="myDiv">
+                <div className="card1  w-100 h-80 ">
                   <h3> {item.product_name}</h3>
                   <p className="small">{item.category}</p>
                   <div className="go-corner" href="#">
@@ -89,78 +61,33 @@ const ViewItem = ({ helmetTitle, CategoryAlldata }) => {
                   </Typography>
                   <Divider className="Divider" sx={{ my: 2 }} />
 
-                  <Typography sx={{ my: 2, fontSize: 18 }}>
+                  <Typography sx={{ my: 1, fontSize: 18 }}>
                     {" "}
                     {item.discription}
                   </Typography>
-                  <Accordion
-                    sx={{ mt: 13, borderRadius: "8px" }}
-                    className="Accordion"
+
+                  <Button
+                    sx={{
+                      mt: 3,
+                      backgroundColor: "#00838d",
+                      "&:hover": {
+                        backgroundColor: "#005e65",
+                      },
+                    }}
+                    role="button"
                   >
-                    <AccordionSummary
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
+                    {" "}
+                    <Link
+                      to={{
+                        pathname: `id_product/${item.product_id}`,
+                        state: { product: Product },
+                      }}
+                      className="btn"
                     >
-                      <Typography
-                        className="servis"
-                        variant="caption"
-                        sx={{ fontSize: "20px" }}
-                      >
-                        ثبت سرویس جدید <ArrowDownward />
-                      </Typography>
-                    </AccordionSummary>
-                    {/* ss */}
-                    <AccordionDetails className="AccordionDetails">
-                      <DateTimerPicker
-                        name="DateTimerPicker"
-                        value={formik.values?.DateTimerPicker}
-                        onChange={formik.handleChange}
-                      />
-
-                      {/*  */}
-
-                      <form onSubmit={formik.handleSubmit}>
-                        <TextField
-                          sx={{ mb: 2.5, alignItems: "center" }}
-                          fullWidth
-                          multiline
-                          rows={4}
-                          color="secondary"
-                          label="توضیحات"
-                          name="Datediscription"
-                          variant="outlined"
-                          value={formik.values?.nameProduct}
-                          onChange={formik.handleChange}
-                          InputProps={{
-                            endAdornment: (
-                              <InputAdornment postion="end">
-                                <Chat color="black" />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-
-                        <Button
-                          type="submit"
-                          sx={{
-                            alignItems: "center",
-                            color: "secondary.main",
-                            backgroundColor: "secondary.main",
-                            "&:hover": {
-                              backgroundColor: "secondary.dark",
-                              color: "secondary.dark",
-                            },
-                          }}
-                          className="button-37 btn"
-                        >
-                          سرویس انجام شد <DownloadDone />
-                        </Button>
-                      </form>
-
-                      <CardActions></CardActions>
-                    </AccordionDetails>{" "}
-                  </Accordion>
-                </h4>
+                      ثبت سرویس جدید
+                    </Link>
+                  </Button>
+                </div>
               </div>
             </Grid>
           ))}

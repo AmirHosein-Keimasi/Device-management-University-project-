@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { FornSchema, contactSchema } from "../Validation/contactValidation";
+import { FormSchema } from "../Validation/contactValidation";
 import CustomDivider from "../Constants/CustomDivider";
 import { Add, Chat, Devices } from "@mui/icons-material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
@@ -9,15 +9,15 @@ import {
   CardContent,
   InputAdornment,
   Slide,
-  Typography,
   TextField,
 } from "@mui/material";
+
 import { ToastContainer, toast } from "react-toastify";
 import FormPng from "../Assets/FormPng.png";
 import "../App.css";
 import { addProduct } from "../Server/servises";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+
 
 const AddItem = ({ helmetTitle, CategoryAlldata }) => {
   const [loading, setLoading] = useState(false);
@@ -61,14 +61,15 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
     }
   };
 
-  const contactInputNames = { categorys: "", nameProduct: "", discription: "" };
+  const Formvalidation = { categorys: "", nameProduct: "", discription: "" };
   const formik = useFormik({
-    initialValues: contactInputNames,
+    initialValues: Formvalidation,
     onSubmit: (values, { resetForm }) => {
+ 
       addProductForm(values.categorys, values.nameProduct, values.discription);
       resetForm();
     },
-    validationSchema: FornSchema,
+    validationSchema: FormSchema,
   });
 
   return (
@@ -93,16 +94,21 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
         cColor="primary"
         align="center"
         CustomDivider
-        text={<h5 className="btn CustomDivider" to={""}>
-        {" "}
-        <Add  />  اضافه کردن یک ایتم  
-      </h5>
+        text={
+          <h5 className="btn CustomDivider" to={""}>
+            {" "}
+            <Add /> اضافه کردن یک ایتم
+          </h5>
         }
       />
-      <form autoComplete="off" className="addForm" onSubmit={formik.handleSubmit} >
+      <form
+        autoComplete="off"
+        className="addForm"
+        onSubmit={formik.handleSubmit}
+      >
         <CardContent
           sx={{
-            flexDirection: "column"
+            flexDirection: "column",
           }}
         >
           <Grid container>
@@ -138,7 +144,7 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
                     onChange={formik.handleChange}
                     InputProps={{
                       endAdornment: (
-                        <InputAdornment postion="end">
+                        <InputAdornment position="end">
                           <Devices color="secondary" />
                         </InputAdornment>
                       ),
@@ -209,7 +215,7 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
                     variant="outlined"
                     InputProps={{
                       endAdornment: (
-                        <InputAdornment postion="end">
+                        <InputAdornment position="end">
                           <Chat color="secondary" />
                         </InputAdornment>
                       ),
@@ -273,9 +279,10 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
                   justifyContent: "center",
 
                   position: "absolute",
-                 
+
                   left: "100px",
                   opacity: "80%",
+                  zIndex: "-1000",
                 }}
               />
             </Grid>

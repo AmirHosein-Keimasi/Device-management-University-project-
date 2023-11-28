@@ -66,7 +66,8 @@ export default function Madia() {
             icon={action.icon}
             onClick={() => {
               setOpen(false);
-              window.location.href = action.link;
+              window.open(action.link)
+            
             }}
             tooltipTitle={action.name}
           />

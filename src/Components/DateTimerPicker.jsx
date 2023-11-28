@@ -5,18 +5,18 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import useTheme from "@mui/system/useTheme";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-export default function AdapterJalali() {
+const AdapterJalali=()=> {
   const existingTheme = useTheme();
   const theme = React.useMemo(
     () => createTheme({ direction: "rtl" }, existingTheme),
     [existingTheme]
   );
-  const [DatePick, setDatePick] = React.useState();
+const [DatePick, setDatePick] = React.useState();
   const handelGetDate = (e) => {
     // console.log(new Intl.DateTimeFormat("fa-IR").format(e));
     const date = new Date(e);
     const timestamp = date.getTime();
-    setDatePick(timestamp);
+    setDatePick(timestamp)
   };
 
   return (
@@ -34,3 +34,4 @@ export default function AdapterJalali() {
     </ThemeProvider>
   );
 }
+export default AdapterJalali

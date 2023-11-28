@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import FabAdd from "./FabAdd";
 
 
+
 const MainPage = ({ helmetTitle, CategoryAlldata }) => {
  
 
@@ -15,7 +16,7 @@ const MainPage = ({ helmetTitle, CategoryAlldata }) => {
       <MainContainer />
       <ItemCard CategoryAlldata={CategoryAlldata} />
       <FabAdd />
-     
+    
     </>
   );
 };
