@@ -1,5 +1,4 @@
 import { Button, CardMedia, Box, Grid } from "@mui/material";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import "./Card.css";
 

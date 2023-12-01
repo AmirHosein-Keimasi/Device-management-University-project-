@@ -1,28 +1,13 @@
-import {
-  CardActions,
-  Accordion,
-  Typography,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Button,
-  InputAdornment,
-  TextField,
-  Grid,
-  Divider,
-} from "@mui/material";
+import { Typography, Box, Button, Grid, Divider } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { GetNearService, getNearService, getProduct } from "../Server/servises";
+import { getNearService } from "../Server/servises";
 import { Helmet } from "react-helmet-async";
 import "./Card.css";
-import DateTimerPicker from "./DateTimerPicker";
-import { ArrowDownward, Chat, DownloadDone } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import FabBack from "./FabBack";
 import moment from "moment-jalaali";
 
-const NearestService = ({ helmetTitle, CategoryAlldata }) => {
+const NearestService = ({ helmetTitle }) => {
   const [NearProduct, setNearProduct] = useState([]);
 
   useEffect(() => {
@@ -40,9 +25,9 @@ const NearestService = ({ helmetTitle, CategoryAlldata }) => {
     };
   }, []);
   function convertToJalali(date) {
-    return moment(date).format('jYYYY/jM/jD');
-}
- 
+    return moment(date).format("jYYYY/jM/jD");
+  }
+
   return (
     <>
       <Helmet>
@@ -74,7 +59,8 @@ const NearestService = ({ helmetTitle, CategoryAlldata }) => {
                   <Divider className="Divider" sx={{ my: 2 }} />
 
                   <Typography variant="body1">
-                    اخیرین سرویس انجام شده :{convertToJalali(item.last_service_date)}
+                    اخیرین سرویس انجام شده :
+                    {convertToJalali(item.last_service_date)}
                   </Typography>
                   <Divider className="Divider" sx={{ my: 2 }} />
 
