@@ -1,5 +1,5 @@
-import {useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   Divider,
@@ -15,7 +15,8 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Typography,Button
+  Typography,
+  Button,
 } from "@mui/material";
 import FabBack from "../FabBack";
 
@@ -40,19 +41,24 @@ export default function DrawerAppBar({ CategoryAlldata }) {
           my: 5,
         }}
       >
-        <img
-          src={require("../../Assets/Logo.png")}
-          className="w-50 "
-          alt="Logo"
-        />
+        <Link className="btn CustomDivider" to={"/"}>
+    <img
+        src={require("../../Assets/Logo.png")}
+        className="w-50"
+        alt="Logo"
+    />
+</Link>
       </Box>{" "}
       <List sx={{ textAlign: "center", alignItems: "start" }}>
         {Object.values(CategoryAlldata).map((item, index) => (
-          <ListItem key={item.name } disablePadding sx={{color:"#text.main"}}>
-            <ListItemButton >
+          <ListItem key={item.name} disablePadding sx={{ color: "#text.main" }}>
+            <ListItemButton>
               <ListItemIcon>
-                <Button onClick={() => handleClick(item.id)} className="btn" >
-                  <ListItemText primary={item.name} sx={{color:"text.main"}}/>
+                <Button onClick={() => handleClick(item.id)} className="btn">
+                  <ListItemText
+                    primary={item.name}
+                    sx={{ color: "text.main" }}
+                  />
                   <Divider></Divider>
                 </Button>
               </ListItemIcon>
@@ -126,11 +132,13 @@ export default function DrawerAppBar({ CategoryAlldata }) {
                 flexGrow: 0,
               }}
             >
-              <img
-                src={require("../../Assets/Logo.png")}
-                className="w-50"
-                alt="Logo"
-              />
+              <Link className="btn CustomDivider" to={"/"}>
+                <img
+                  src={require("../../Assets/Logo.png")}
+                  className="w-50"
+                  alt="Logo"
+                />
+              </Link>
             </Box>{" "}
           </Toolbar>
         </AppBar>
@@ -141,66 +149,4 @@ export default function DrawerAppBar({ CategoryAlldata }) {
       <FabBack />
     </>
   );
-}
-
-// Create Drawer
-{
-  /* const drawer = (
-  <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-    <Box
-      sx={{
-        justifyContent: "center",
-        alignItems: "center",
-        flexGrow: 0,
-      }}
-    >
-      <img src={require("../../Assets/Logo.png")} alt="Logo" />
-    </Box>{" "}
-    <Divider />
-    <List sx={{ textAlign: "center" }}>
-      <Home />
-      <About />
-    </List>
-  </Box>
-);
-<nav>
-              {" "}
-              <Drawer
-                anchor="right"
-                variant="temporary"
-                open={mobileOpen}
-                onClose={handleDrawerToggle}
-                ModalProps={{
-                  keepMounted: true, // Better open performance on mobile.
-                }}
-                sx={{
-                  display: { xs: "block", sm: "none" },
-                  "& .MuiDrawer-paper": {
-                    boxSizing: "border-box",
-                    width: drawerWidth,
-                  },
-                }}
-              >
-                {drawer}
-              </Drawer>
-            </nav>{" "}
-
-const [mobileOpen, setMobileOpen] = useState(false);
-const handleDrawerToggle = () => {
-  setMobileOpen((prevState) => !prevState);
-};
-
-
-
-
-<IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
-            >
-              <MenuIcon />
-            </IconButton>
-*/
 }

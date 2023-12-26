@@ -4,10 +4,12 @@ import CustomDivider from "../Constants/CustomDivider";
 import { Add, RemoveRedEye } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import "../App.css";
+import Inputs from "./Inputs";
 
 const DividereContainer = () => {
   return (
     <>
+    
       <Grid container>
         <Grid item xs={12} sm={6} md={6} xl={6} sx={{ mb: 1 }}>
           <CustomDivider 
@@ -30,9 +32,9 @@ const DividereContainer = () => {
             cColor="primary"
             align="center"
             text={
-              <Link className="btn CustomDivider" to={"/NearestService"}>
+              <Link className="btn CustomDivider" to={"/AddCategory"}>
                 {" "}
-                <RemoveRedEye /> نزدیک ترین سرویس ها
+                <Add  /> اضافه کردن یک دسته بندی جدید
               </Link>
             }
           />

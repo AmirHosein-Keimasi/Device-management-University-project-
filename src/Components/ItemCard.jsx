@@ -8,6 +8,7 @@ const ItemCard = ({ CategoryAlldata }) => {
 
   return (
     <Box
+    
       sx={{
         display: "flex",
         alignItems: "center",

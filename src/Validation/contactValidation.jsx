@@ -9,3 +9,7 @@ export const DateSchema = Yup.object().shape({
   DateTimerPicker: Yup.date(),
   discription: Yup.string(),
 });
+export const Category = Yup.object().shape({
+  DateTimerPicker: Yup.date(),
+  discription: Yup.string(),
+});

@@ -29,6 +29,7 @@ import {
   useUpdateCursorify,
   EmojiCursor
 } from "@cursorify/react";
+import AddCategory from "./Components/AddCategory.jsx";
 
 function App() {
   const [CategoryAlldata, setCategorydata] = useState([]);
@@ -123,9 +124,9 @@ function App() {
                 }
               />
               <Route
-                path="/NearestService"
+                path="/AddCategory"
                 element={
-                  <NearestService helmetTitle=" مدیریت دیوایس ها || نزدیک ترین دیوایس ها" />
+                  <AddCategory helmetTitle=" مدیریت دیوایس ها || نزدیک ترین دیوایس ها" />
                 }
               />
               <Route

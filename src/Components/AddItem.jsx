@@ -97,7 +97,7 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
         text={
           <h5 className="btn CustomDivider" to={""}>
             {" "}
-            <Add /> اضافه کردن یک ایتم
+            <Add /> اضافه کردن ایتم جدید
           </h5>
         }
       />
@@ -113,47 +113,7 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
         >
           <Grid container>
             <Grid lg={6} sx={{ p: 4 }} container spacing={2}>
-              <Grid xs={12} sm={12} md={7} lg={12} xl={12}>
-                <Slide
-                  direction="right"
-                  in={loading}
-                  style={{
-                    transitionDelay: loading ? "400ms" : "0ms",
-                  }}
-                >
-                  <TextField
-                    sx={{ p: 0.5 }}
-                    fullWidth
-                    color="secondary"
-                    label="نام ایتم"
-                    name="nameProduct"
-                    variant="outlined"
-                    multiline
-                    SelectProps={{
-                      native: true,
-                    }}
-                    helperText={
-                      formik.touched.nameProduct
-                        ? formik.errors.nameProduct
-                        : null
-                    }
-                    error={Boolean(
-                      formik.touched.nameProduct && formik.errors.nameProduct
-                    )}
-                    value={formik.values?.nameProduct}
-                    onChange={formik.handleChange}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Devices color="secondary" />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Slide>
-              </Grid>
-
-              <Grid xs={12} sm={12} md={7} lg={12} xl={12}>
+            <Grid xs={12} sm={12} md={7} lg={12} xl={12}>
                 <Slide
                   direction="right"
                   in={loading}
@@ -195,6 +155,47 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
                   </TextField>
                 </Slide>
               </Grid>
+              <Grid xs={12} sm={12} md={7} lg={12} xl={12}>
+                <Slide
+                  direction="right"
+                  in={loading}
+                  style={{
+                    transitionDelay: loading ? "400ms" : "0ms",
+                  }}
+                >
+                  <TextField
+                    sx={{ p: 0.5 }}
+                    fullWidth
+                    color="secondary"
+                    label="نام ایتم"
+                    name="nameProduct"
+                    variant="outlined"
+                    multiline
+                    SelectProps={{
+                      native: true,
+                    }}
+                    helperText={
+                      formik.touched.nameProduct
+                        ? formik.errors.nameProduct
+                        : null
+                    }
+                    error={Boolean(
+                      formik.touched.nameProduct && formik.errors.nameProduct
+                    )}
+                    value={formik.values?.nameProduct}
+                    onChange={formik.handleChange}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <Devices color="secondary" />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Slide>
+              </Grid>
+
+              
 
               <Grid xs={12} sm={12} md={7} lg={12} xl={12}>
                 <Slide

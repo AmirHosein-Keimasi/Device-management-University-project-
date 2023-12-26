@@ -59,3 +59,17 @@
     transform: translateY(-3px);
     color: whitesmoke;
 }
+
+@media (max-width:1060px) {
+    .btn-Service {
+        width: 75px;
+    }
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.SubmitBtn:hover {
+    color: white;
+}
