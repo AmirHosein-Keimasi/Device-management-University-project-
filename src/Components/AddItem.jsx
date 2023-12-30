@@ -15,12 +15,14 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import FormPng from "../Assets/FormPng.png";
 import "../App.css";
-import { addProduct } from "../Server/servises";
+import { getCategory, addProduct } from "../Server/servises";
 import { useEffect, useState } from "react";
-
+import Addinputs from "./Addinputs";
+import Inputs from "./Inputs";
 
 const AddItem = ({ helmetTitle, CategoryAlldata }) => {
   const [loading, setLoading] = useState(false);
+  const [IdCategory, setIdCategory] = useState();
 
   useEffect(() => {
     setLoading(true);
@@ -30,62 +32,13 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
     };
   }, []);
 
-  const addProductForm = async (categorys, nameProduct, discription) => {
-    try {
-      const result = await addProduct(categorys, nameProduct, discription);
-      if (result) {
-        console.log(result);
-        toast.success("ایتم مورد نظر ثبت شد ", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-      }
-    } catch (error) {
-      console.log(error.message);
-      toast.error("خطا در افزودن محصول!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    }
-  };
-
-  const Formvalidation = { categorys: "", nameProduct: "", discription: "" };
-  const formik = useFormik({
-    initialValues: Formvalidation,
-    onSubmit: (values, { resetForm }) => {
- 
-      addProductForm(values.categorys, values.nameProduct, values.discription);
-      resetForm();
-    },
-    validationSchema: FormSchema,
-  });
+  function handleChange(event) {
+    setIdCategory(event.target.value);
+    // formik.handleChange(event); // Call this to ensure formik's state is updated
+  }
 
   return (
     <>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
       <Helmet>
         <title>{helmetTitle}</title>
       </Helmet>{" "}
@@ -101,19 +54,20 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
           </h5>
         }
       />
-      <form
-        autoComplete="off"
-        className="addForm"
-        onSubmit={formik.handleSubmit}
-      >
-        <CardContent
-          sx={{
-            flexDirection: "column",
-          }}
-        >
+      <form autoComplete="off" className="addForm">
+        <CardContent sx={{ flexDirection: "column" }}>
           <Grid container>
-            <Grid lg={6} sx={{ p: 4 }} container spacing={2}>
-            <Grid xs={12} sm={12} md={7} lg={12} xl={12}>
+            <Grid
+              xs={12}
+              sm={11}
+              md={10}
+              lg={8}
+              xl={8}
+              sx={{ p: 2 }}
+              container
+              spacing={2}
+            >
+              <Grid xs={12} sm={12} md={12} lg={12} xl={12}>
                 <Slide
                   direction="right"
                   in={loading}
@@ -133,14 +87,7 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
                     SelectProps={{
                       native: true,
                     }}
-                    helperText={
-                      formik.touched.categorys ? formik.errors.categorys : null
-                    }
-                    error={Boolean(
-                      formik.touched.categorys && formik.errors.categorys
-                    )}
-                    value={formik.values?.categorys}
-                    onChange={formik.handleChange}
+                    onChange={handleChange}
                   >
                     {CategoryAlldata.length > 0 &&
                       CategoryAlldata.map((group) => (
@@ -155,110 +102,12 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
                   </TextField>
                 </Slide>
               </Grid>
-              <Grid xs={12} sm={12} md={7} lg={12} xl={12}>
-                <Slide
-                  direction="right"
-                  in={loading}
-                  style={{
-                    transitionDelay: loading ? "400ms" : "0ms",
-                  }}
-                >
-                  <TextField
-                    sx={{ p: 0.5 }}
-                    fullWidth
-                    color="secondary"
-                    label="نام ایتم"
-                    name="nameProduct"
-                    variant="outlined"
-                    multiline
-                    SelectProps={{
-                      native: true,
-                    }}
-                    helperText={
-                      formik.touched.nameProduct
-                        ? formik.errors.nameProduct
-                        : null
-                    }
-                    error={Boolean(
-                      formik.touched.nameProduct && formik.errors.nameProduct
-                    )}
-                    value={formik.values?.nameProduct}
-                    onChange={formik.handleChange}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Devices color="secondary" />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Slide>
-              </Grid>
 
-              
-
-              <Grid xs={12} sm={12} md={7} lg={12} xl={12}>
-                <Slide
-                  direction="right"
-                  in={loading}
-                  style={{
-                    transitionDelay: loading ? "600ms" : "0ms",
-                  }}
-                >
-                  <TextField
-                    sx={{ p: 0.5 }}
-                    fullWidth
-                    multiline
-                    rows={6}
-                    color="secondary"
-                    label="توضیحات"
-                    name="discription"
-                    variant="outlined"
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Chat color="secondary" />
-                        </InputAdornment>
-                      ),
-                    }}
-                    SelectProps={{
-                      native: true,
-                    }}
-                    helperText={
-                      formik.touched.discription
-                        ? formik.errors.discription
-                        : null
-                    }
-                    error={Boolean(
-                      formik.touched.messdiscriptionage &&
-                        formik.errors.discription
-                    )}
-                    value={formik.values?.discription}
-                    onChange={formik.handleChange}
-                  />
-                </Slide>
-              </Grid>
-
-              <Grid xs={12} sm={12} md={7} lg={12} xl={12}>
-                <Slide
-                  direction="right"
-                  in={loading}
-                  style={{
-                    transitionDelay: loading ? "700ms" : "0ms",
-                  }}
-                >
-                  <Button
-                    type="submit"
-                    color="secondary"
-                    variant="contained"
-                    sx={{ mt: 2, py: 2 }}
-                    fullWidth
-                  >
-                    ارسال کن
-                  </Button>
-                </Slide>
+              <Grid xs={11} sm={112} md={11} lg={10} xl={10}>
+                <Inputs IdCategory={IdCategory} />
               </Grid>
             </Grid>
+
             <Grid
               spacing={1}
               sx={{
@@ -277,10 +126,9 @@ const AddItem = ({ helmetTitle, CategoryAlldata }) => {
                 src={FormPng}
                 height="400px"
                 style={{
+                  top: "280px",
                   justifyContent: "center",
-
                   position: "absolute",
-
                   left: "100px",
                   opacity: "80%",
                   zIndex: "-1000",

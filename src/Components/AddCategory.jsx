@@ -25,7 +25,10 @@ const AddCategory = ({ helmetTitle, CategoryAlldata }) => {
   const handleAddInput = () => {
     setInputs([...inputs, `input-${inputs.length}`]);
   };
-
+  const handleRemoveInput = () => {
+    setInputs(inputs.slice(0, -1));
+  };
+ 
   const handleChange = (event, name) => {
     setValues({ ...values, [name]: event.target.value });
   };
@@ -107,6 +110,7 @@ const AddCategory = ({ helmetTitle, CategoryAlldata }) => {
       );
 
       resetForm();
+      window.location.reload();
     },
   });
 
@@ -162,6 +166,24 @@ const AddCategory = ({ helmetTitle, CategoryAlldata }) => {
             className="SubmitBtn"
           >
             اضافه کردن ورودی
+          </Button>
+        </Slide>
+        <Slide
+          direction="right"
+          in={loading}
+          style={{
+            transitionDelay: loading ? "700ms" : "0ms",
+          }}
+        >
+          <Button
+            type="submit"
+            color="secondary"
+            variant="contained"
+            sx={{ mx: 2, p: 2 }}
+            onClick={handleRemoveInput}
+            className="SubmitBtn"
+          >
+            حذف کردن ورودی
           </Button>
         </Slide>
       </Grid>

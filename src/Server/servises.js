@@ -20,6 +20,14 @@ export const getProduct = (itemId) => {
   return axios.get(url);
 };
 
+//Get CategoryInputs
+export const getCategory = (CategoryId) => {
+  const url = `${SERVER_URL}get_category.php?id_category=${CategoryId}`;
+  return axios.get(url);
+};
+
+
+//Add Category
 export const addCategory = (
   nameCategory,
   TiemService,

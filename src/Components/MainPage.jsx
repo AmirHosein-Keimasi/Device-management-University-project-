@@ -3,6 +3,7 @@ import MainContainer from "./DividereContainer";
 import { Helmet } from "react-helmet-async";
 import FabAdd from "./FabAdd";
 import AddCategory from "./AddCategory"
+import Addinputs from "./Addinputs";
 
 
 const MainPage = ({ helmetTitle, CategoryAlldata }) => {
@@ -10,13 +11,13 @@ const MainPage = ({ helmetTitle, CategoryAlldata }) => {
 
   return (
     <>
-      <Helmet>
+     <Helmet>
         <title>{helmetTitle}</title>
       </Helmet>
       <MainContainer />
       <ItemCard CategoryAlldata={CategoryAlldata} />
       <FabAdd />
-   
+   {/* <Addinputs/> */}
     </>
   );
 };
