@@ -13,3 +13,7 @@ export const Category = Yup.object().shape({
   DateTimerPicker: Yup.date(),
   discription: Yup.string(),
 });
+export const Inputss = Yup.object().shape({
+  nameProduct: Yup.string().required("نام ایتم الزامی می باشد"),
+  CategoryInput: Yup.string().required("نام ایتم الزامی می باشد"),
+});

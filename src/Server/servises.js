@@ -26,7 +26,6 @@ export const getCategory = (CategoryId) => {
   return axios.get(url);
 };
 
-
 //Add Category
 export const addCategory = (
   nameCategory,
@@ -46,12 +45,12 @@ export const addCategory = (
 };
 
 //Post Create Product
-export const addProduct = (itemId, ProductName, discription) => {
-  const url = `${SERVER_URL}add_product.php?id_category=${itemId}&name_product=${ProductName}&discription=${discription}`;
+//http://localhost/v1/add_product.php?id_category=5&json_values={"nameProduct":"555","color":"red","size":25,"description":"fvfjknvsld;dscksdklvs"}
+export const addProduct = (IdCategory, jsonValues) => {
+  const url = `${SERVER_URL}add_product.php?id_category=${IdCategory}&json_values=${jsonValues}`;
   return axios.post(url, {
-    id_category: itemId,
-    name_product: ProductName,
-    discription: discription,
+    id_category: IdCategory,
+    jsonValues: jsonValues,
   });
 };
 

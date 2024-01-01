@@ -1,8 +1,8 @@
 import React from "react";
 import { useFormik } from "formik";
-import { FormSchema } from "../Validation/contactValidation";
+import { Inputss } from "../Validation/contactValidation";
 import CustomDivider from "../Constants/CustomDivider";
-import { Category, Devices } from "@mui/icons-material";
+import { Category, Chat, Devices } from "@mui/icons-material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { Helmet } from "react-helmet-async";
 import {
@@ -17,12 +17,27 @@ import { ToastContainer, toast } from "react-toastify";
 import FormPng from "../Assets/FormPng.png";
 import "../App.css";
 import { getCategory, addProduct } from "../Server/servises";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Addinputs from "./Addinputs";
 
 const Inputs = ({ IdCategory }) => {
   const [loading, setLoading] = useState(false);
   const [CategoryInputs, setCategoryInputs] = useState([]);
+  const [ValueofInputs, setValueofInputs] = useState([]);
+  const formRef = useRef();
+
+  const handleChange = (event, CategoryInput) => {
+    setValueofInputs({ ...ValueofInputs, [CategoryInput]: event.target.value });
+  };
+
+  const jsonValues = JSON.stringify(ValueofInputs);
+
+  useEffect(() => {
+    const form = formRef.current;
+    for (let i = 0; i < form.elements.length; i++) {
+      form.elements[i].value = "";
+    }
+  }, [IdCategory]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,6 +50,8 @@ const Inputs = ({ IdCategory }) => {
       }
     };
     if (IdCategory) {
+      setValueofInputs();
+      setValueofInputs();
       fetchData();
     }
   }, [IdCategory]);
@@ -47,9 +64,9 @@ const Inputs = ({ IdCategory }) => {
     };
   }, []);
 
-  const addProductForm = async (categorys, nameProduct, discription) => {
+  const addProductForm = async (IdCategory, jsonValues) => {
     try {
-      const result = await addProduct(categorys, nameProduct, discription);
+      const result = await addProduct(IdCategory, jsonValues);
       if (result) {
         console.log(result);
         toast.success("ایتم مورد نظر ثبت شد ", {
@@ -77,16 +94,20 @@ const Inputs = ({ IdCategory }) => {
       });
     }
   };
-
-  //   const Formvalidation = { categorys: "", nameProduct: "", discription: "" };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(IdCategory, jsonValues);
+    addProductForm(IdCategory, jsonValues);
+  };
+  const Formvalidation = { nameProduct: "", CategoryInput: "" };
   const formik = useFormik({
-    // initialValues: Formvalidation,
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      //   addProductForm(values.categorys, values.nameProduct, values.discription);
-      //   resetForm();
+    initialValues: Formvalidation,
+    onSubmit: (values,IdCategory, jsonValues, { resetForm }) => {
+      console.log(IdCategory, jsonValues);
+      addProductForm(IdCategory, jsonValues);
+      resetForm();
     },
-    validationSchema: FormSchema,
+    validationSchema: Inputss,
   });
 
   return (
@@ -106,7 +127,8 @@ const Inputs = ({ IdCategory }) => {
       <form
         autoComplete="off"
         className="addForm"
-        onSubmit={formik.handleSubmit}
+        onSubmit={handleSubmit}
+        ref={formRef}
       >
         <Grid container spacing={2}>
           <Grid xs={11} sm={10} md={9} lg={9} xl={9}>
@@ -114,7 +136,7 @@ const Inputs = ({ IdCategory }) => {
               direction="right"
               in={loading}
               style={{
-                transitionDelay: loading ? "400ms" : "0ms",
+                transitionDelay: loading ? "500ms" : "0ms",
               }}
             >
               <TextField
@@ -122,20 +144,13 @@ const Inputs = ({ IdCategory }) => {
                 fullWidth
                 color="secondary"
                 label="نام ایتم"
-                name="nameProduct"
+                name={String("nameProduct")}
                 variant="outlined"
-                multiline
                 SelectProps={{
                   native: true,
                 }}
-                helperText={
-                  formik.touched.nameProduct ? formik.errors.nameProduct : null
-                }
-                error={Boolean(
-                  formik.touched.nameProduct && formik.errors.nameProduct
-                )}
-                value={formik.values?.nameProduct}
-                onChange={formik.handleChange}
+                type="text"
+                onChange={(event) => handleChange(event, "nameProduct")}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -152,31 +167,25 @@ const Inputs = ({ IdCategory }) => {
               direction="right"
               in={loading}
               style={{
-                transitionDelay: loading ? "400ms" : "0ms",
+                transitionDelay: loading ? "300ms" : "0ms",
               }}
+              key={index}
             >
-              <Grid xs={11} sm={10} md={9} lg={9} xl={9} key={index}>
+              <Grid xs={11} sm={10} md={9} lg={9} xl={9}>
                 <TextField
+                  type="text"
                   sx={{ p: 0.5 }}
                   fullWidth
                   color="secondary"
                   label={CategoryInput}
-                  name={CategoryInput}
                   variant="outlined"
+                  name={String(CategoryInput)}
                   multiline
                   SelectProps={{
                     native: true,
                   }}
-                  helperText={
-                    formik.touched.CategoryInput
-                      ? formik.errors.CategoryInput
-                      : null
-                  }
-                  error={Boolean(
-                    formik.touched.CategoryInput && formik.errors.CategoryInput
-                  )}
-                  value={formik.values?.CategoryInput}
-                  onChange={formik.handleChange}
+                  onChange={(event) => handleChange(event, CategoryInput)}
+                  // value={formik.values?.CategoryInput}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -188,6 +197,34 @@ const Inputs = ({ IdCategory }) => {
               </Grid>
             </Slide>
           ))}
+          <Grid xs={11} sm={10} md={9} lg={9} xl={9}>
+            <Slide
+              direction="right"
+              in={loading}
+              style={{
+                transitionDelay: loading ? "600ms" : "0ms",
+              }}
+            >
+              <TextField
+                type="text"
+                sx={{ m: 0.5, width: "50ch" }}
+                multiline
+                rows={6}
+                color="secondary"
+                label="توضیحات"
+                name="description"
+                variant="outlined"
+                onChange={(event) => handleChange(event, "description")}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Chat color="secondary" />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Slide>
+          </Grid>
 
           <Grid xs={11} sm={10} md={9} lg={9} xl={9}>
             <Slide

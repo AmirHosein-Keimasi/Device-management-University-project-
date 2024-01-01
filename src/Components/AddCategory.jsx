@@ -28,10 +28,12 @@ const AddCategory = ({ helmetTitle, CategoryAlldata }) => {
   const handleRemoveInput = () => {
     setInputs(inputs.slice(0, -1));
   };
- 
+
   const handleChange = (event, name) => {
     setValues({ ...values, [name]: event.target.value });
   };
+
+
 
   useEffect(() => {
     setLoading(true);
@@ -146,46 +148,50 @@ const AddCategory = ({ helmetTitle, CategoryAlldata }) => {
       <Grid
         container
         direction="row"
-        justifyContent="end"
+        justifyContent="space-between"
         alignItems="flex-start"
         spacing={1}
       >
-        <Slide
-          direction="right"
-          in={loading}
-          style={{
-            transitionDelay: loading ? "500ms" : "0ms",
-          }}
-        >
-          <Button
-            type="submit"
-            color="secondary"
-            variant="contained"
-            sx={{ mx: 2, p: 2 }}
-            onClick={handleAddInput}
-            className="SubmitBtn"
+        <Grid>
+          <Slide
+            direction="right"
+            in={loading}
+            style={{
+              transitionDelay: loading ? "500ms" : "0ms",
+            }}
           >
-            اضافه کردن ورودی
-          </Button>
-        </Slide>
-        <Slide
-          direction="right"
-          in={loading}
-          style={{
-            transitionDelay: loading ? "700ms" : "0ms",
-          }}
-        >
-          <Button
-            type="submit"
-            color="secondary"
-            variant="contained"
-            sx={{ mx: 2, p: 2 }}
-            onClick={handleRemoveInput}
-            className="SubmitBtn"
+            <Button
+              type="submit"
+              color="secondary"
+              variant="contained"
+              sx={{ mx: 2, p: 2 }}
+              onClick={handleAddInput}
+              className="SubmitBtn"
+            >
+              اضافه کردن ورودی
+            </Button>
+          </Slide>
+        </Grid>
+        <Grid>
+          <Slide
+            direction="right"
+            in={loading}
+            style={{
+              transitionDelay: loading ? "700ms" : "0ms",
+            }}
           >
-            حذف کردن ورودی
-          </Button>
-        </Slide>
+            <Button
+              type="submit"
+              color="secondary"
+              variant="contained"
+              sx={{ mx: 2, p: 2 }}
+              onClick={handleRemoveInput}
+              className="SubmitBtn"
+            >
+              حذف کردن ورودی
+            </Button>
+          </Slide>
+        </Grid>
       </Grid>
       <form
         autoComplete="off"
@@ -199,7 +205,7 @@ const AddCategory = ({ helmetTitle, CategoryAlldata }) => {
           alignItems="flex-start"
           spacing={1}
         >
-          <Grid item>
+          <Grid item={true.toString()}>
             <Grid sx={{ p: 4 }}>
               <Grid>
                 <Slide
@@ -327,8 +333,8 @@ const AddCategory = ({ helmetTitle, CategoryAlldata }) => {
             justifyContent="space-between"
           >
             {inputs.map((input, name) => (
-              <Grid item>
-                <div key={input}>
+              <Grid item={true.toString()} key={input}>
+                <div>
                   <Slide
                     direction="right"
                     in={loading}
@@ -337,12 +343,13 @@ const AddCategory = ({ helmetTitle, CategoryAlldata }) => {
                     }}
                   >
                     <TextField
-                      name={name}
+                      name={String(name)}
                       className="TextFieldInput"
                       sx={{ width: "50ch" }}
                       color="secondary"
                       label="ویژگی مورد نظر"
                       variant="outlined"
+                      value={formik.values?.name}
                       onChange={(event) => handleChange(event, name)}
                       InputProps={{
                         endAdornment: (
@@ -360,7 +367,7 @@ const AddCategory = ({ helmetTitle, CategoryAlldata }) => {
         </Grid>
 
         <Grid container sx={{ p: 1 }}>
-          <Grid item xs={12}>
+          <Grid item={true.toString()} xs={12}>
             <Slide
               direction="right"
               in={loading}

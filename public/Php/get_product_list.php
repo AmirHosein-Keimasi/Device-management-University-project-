@@ -1,5 +1,7 @@
 <?php
-include_once('database_config.php');
+include 'config.php';
+include 'database.php';
+include 'functions.php';
 
 try {
     $id_category = $_REQUEST['id_category'];

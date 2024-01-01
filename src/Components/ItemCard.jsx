@@ -19,7 +19,8 @@ const ItemCard = ({ CategoryAlldata }) => {
       <Grid container >
         {Object.values(CategoryAlldata).map((item, index) => (
           <Grid item xs={12} sm={6} md={4}  xl={4} key={index}  >
-            <div  className="container"> 
+        
+            <div  className="container" > 
               <a className="card2" >
                 <CardMedia
                 className=""
