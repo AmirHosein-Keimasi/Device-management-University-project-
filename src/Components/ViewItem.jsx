@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import FabBack from "./FabBack";
 import moment from "moment-jalaali";
+import { display } from "@mui/system";
 
 const ViewItem = ({ helmetTitle }) => {
   const [Product, setProduct] = useState([]);
@@ -16,7 +17,6 @@ const ViewItem = ({ helmetTitle }) => {
       try {
         const { data } = await getProduct(itemId);
         setProduct(data);
-       
       } catch (error) {
         console.log(error);
       }
@@ -25,6 +25,8 @@ const ViewItem = ({ helmetTitle }) => {
       fetchDate();
     };
   }, []);
+
+  console.log(Product);
 
   function convertToJalali(date) {
     return moment(date, "YYYY-M-D").format("jYYYY/jM/jD");
@@ -46,15 +48,20 @@ const ViewItem = ({ helmetTitle }) => {
       >
         <Grid container className="body" spacing={1}>
           {Object.values(Product).map((item, index) => (
+            
             <Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={index}>
               <div className="container w-100 " id="myDiv">
-                <div className="card1  w-100 h-80 ">
+                <div className="card1  w-100 h-800 ">
                   <h3> {item.product_name}</h3>
                   <p className="small">{item.category}</p>
                   <div className="go-corner" href="#">
                     <div className="go-arrow">→</div>
                   </div>
-
+                  {Object.entries(JSON.parse(item.product_values)).map(([key, value]) => (
+                    <p variant="body1">
+                      {key}:{value}
+                    </p>
+                  ))}
                   <Typography variant="body1">
                     اخرین سرویس انجام شده :{" "}
                     {convertToJalali(item.latest_service_date)}

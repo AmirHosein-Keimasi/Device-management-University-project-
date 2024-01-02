@@ -26,6 +26,19 @@ export const getCategory = (CategoryId) => {
   return axios.get(url);
 };
 
+
+//Get getProductServiceTime
+export const getProductServiceTime = (id_product) => {
+  const url = `${SERVER_URL}get_product_servicetime.php?id_product=${id_product}`;
+  return axios.get(url);
+};
+
+
+
+
+
+
+
 //Add Category
 export const addCategory = (
   nameCategory,
@@ -61,7 +74,6 @@ export const addProductService = (itemId, discription, newDate) => {
   }`;
   return axios.post(url, {
     itemId: itemId,
-
     discription: discription,
     newDate: newDate,
   });

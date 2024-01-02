@@ -50,6 +50,7 @@ export const firefly = {
                     color: {
                         // value: "#75075E"
                         value: "#FD4495",
+                      
                     },
                 },
             },
@@ -116,13 +117,13 @@ export const links = {
                 width: 10,
             },
             polygon: { nb_sides: 5 },
-            stroke: { color: "#00000059", width: 0 },
+            stroke: { color: "#00000059", width: 0 , zIndex: "-1000"},
             type: "circle",
         },
         size: {
-            anim: { enable: false, size_min: 0.1, speed: 10, sync: false },
+            anim: { enable: false, size_min: 0.1, speed: 5, sync: false },
             random: true,
-            value: 5,
+            value: 2.5,
         },
     },
     polygon: {

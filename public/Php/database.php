@@ -59,7 +59,8 @@ function getProductList($db , $id_category) {
         p.name AS product_name, 
         p.discription, 
         c.name AS category, 
-        MAX(s.service_date) AS latest_service_date
+        MAX(s.service_date) AS latest_service_date ,
+        p.values AS product_values
         FROM 
         product p
         INNER JOIN 
