@@ -98,6 +98,7 @@ const Inputs = ({ IdCategory }) => {
     event.preventDefault();
     console.log(IdCategory, jsonValues);
     addProductForm(IdCategory, jsonValues);
+    window.location.reload();
   };
   const Formvalidation = { nameProduct: "", CategoryInput: "" };
   const formik = useFormik({

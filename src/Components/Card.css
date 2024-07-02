@@ -62,7 +62,7 @@
                 display: block;
                 position: relative;
                 max-width: 500px;
-                background-color: #f2f8f9;
+                background-color: #016b7e17;
                 border-radius: 15px;
                 padding: 25px 25px;
                 margin: 12px;
@@ -76,12 +76,12 @@
                     top: -16px;
                     right: -16px;
                     background: #00838d;
-                    height: 32px;
-                    width: 32px;
+                    height: 35px;
+                    width: 35px;
                     border-radius: 32px;
                     transform: scale(1);
                     transform-origin: 80% 50%;
-                    transition: transform 0.5s ease-out;
+                    transition: transform 0.35s ease-out;
                     color: #262626
                 }
                 &:hover:before {
